@@ -21,12 +21,15 @@ from transformers import AutoTokenizer
 from torch import nn, optim
 import torch
 
-from _config import Config 
-config = Config.config
+import wandb 
+#from _config import Config 
+#config = Config.config
 
 parser = argparse.ArgumentParser(description='Barlow Twins Training')
 # parser.add_argument('data', type=Path, metavar='DIR',
 #                     help='path to dataset')
+
+# Training parameters: 
 parser.add_argument('--workers', default=8, type=int, metavar='N',
                     help='number of data loader workers')
 parser.add_argument('--epochs', default=2, type=int, metavar='N',
@@ -41,10 +44,29 @@ parser.add_argument('--weight-decay', default=1e-6, type=float, metavar='W',
                     help='weight decay')
 parser.add_argument('--lambd', default=0.0051, type=float, metavar='L',
                     help='weight on off-diagonal terms')
+
+# Model parameters:
 parser.add_argument('--projector', default='8192-8192-8192', type=str,
                     metavar='MLP', help='projector MLP')
 parser.add_argument('--print-freq', default=100, type=int, metavar='N',
                     help='print frequency')
+
+# Transformer parameters: 
+parser.add_argument('--dmodel', default=768, type=int, metavar='T', 
+                    help='dimension of transformer encoder')
+parser.add_argument('--nhead', default=6, type= int, metavar='N', 
+                    help= 'number of heads in transformer') 
+parser.add_argument('--dfeedforward', default=256, type=int, metavar='F', 
+                    help= 'dimension of feedforward layer in transformer encoder') 
+parser.add_argument('--nlayers', default=6, type=int, metavar= 'N', 
+                   help='number of layers of transformer encoder') 
+
+# Tokenizer: 
+parser.add_argument('--tokenizer', default='bert-base-multilingual-cased', type=str, 
+                metavar='T', help= 'tokenizer')
+parser.add_argument('--mbert-out-size', default=768, type=int, metavar='MO', 
+                    help='Dimension of mbert output')
+# Paths: 
 parser.add_argument('--checkpoint-dir', default='./checkpoint/', type=Path,
                     metavar='DIR', help='path to checkpoint directory')
 
@@ -83,6 +105,7 @@ def main_worker(gpu, args):
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
+        wandb.init(project="test")#############################################
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
         stats_file = open(args.checkpoint_dir / 'stats.txt', 'a', buffering=1)
         print(' '.join(sys.argv))
@@ -91,9 +114,9 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
-    transformer1 = nn.TransformerEncoderLayer(d_model = config["D_MODEL"], nhead=config["N_HEAD"], dim_feedforward=config["DIM_FEEDFORWARD"], batch_first=True)
-    t_enc = nn.TransformerEncoder(transformer1, num_layers=config["NUM_LAYERS"])
-    model = BarlowTwins(projector_layers=config["PROJECTOR_LAYERS"], mbert_out_size=config["MBERT_OUT_SIZE"], transformer_enc=t_enc, lambd=config["LAMBD"]).cuda(gpu)
+    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
+    t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
+    model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert-out-size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
@@ -138,6 +161,7 @@ def main_worker(gpu, args):
     
     for epoch in range(start_epoch, args.epochs):
         sampler.set_epoch(epoch)
+        epoch_loss = 0 
         for step, (sent) in enumerate(loader, start=epoch * len(loader)):
             y1 = sent[0].cuda(gpu, non_blocking=True)
             y2 = sent[1].cuda(gpu, non_blocking=True)
@@ -145,7 +169,8 @@ def main_worker(gpu, args):
             optimizer.zero_grad()
             with torch.cuda.amp.autocast():
                 loss = model.forward(y1, y2)
-                print(loss.item())
+#                print(loss.item())
+                epoch_loss += loss.item()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -158,6 +183,7 @@ def main_worker(gpu, args):
                                  time=int(time.time() - start_time))
                     print(json.dumps(stats))
                     print(json.dumps(stats), file=stats_file)
+        wandb.log(epoch_loss)
         if args.rank == 0:
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
@@ -214,7 +240,7 @@ class BarlowTwins(nn.Module):
         self.transformer_enc = transformer_enc
         self.lambd = lambd
 
-        self.mbert = BertModel.from_pretrained(config["TOKENIZER"])
+        self.mbert = BertModel.from_pretrained(args.tokenizer)
 
         sizes = [self.mbert_out_size] + list(map(int, self.projector_layers.split('-')))
         layers = []
