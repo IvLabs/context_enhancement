@@ -1,0 +1,17 @@
+program: main.py
+method: bayes
+metric: 
+    name: epoch_loss
+    goal: minimize
+parameters: 
+    learning-rate-weights:
+        min: 0.02
+        max: 0.8
+    learning-rate-biases: 
+        min: 0.003
+        max: 0.009
+    lambd: 
+        min: 0
+        max: 1
+
+
