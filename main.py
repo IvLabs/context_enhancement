@@ -25,6 +25,16 @@ import wandb
 #from _config import Config 
 #config = Config.config
 
+#setting random seeds
+SEED = 4444
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
+
+
 parser = argparse.ArgumentParser(description='Barlow Twins Training')
 # parser.add_argument('data', type=Path, metavar='DIR',
 #                     help='path to dataset')
