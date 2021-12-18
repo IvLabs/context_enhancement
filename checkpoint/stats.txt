@@ -1,0 +1,17 @@
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+{"epoch": 0, "step": 0, "lr_weights": 0.0, "lr_biases": 0.0, "loss": 4355597.5, "time": 106}
+main.py
+main.py
+{"epoch": 0, "step": 0, "lr_weights": 0.0, "lr_biases": 0.0, "loss": 4599995.5, "time": 107}
+{"epoch": 0, "step": 100, "lr_weights": 0.00016622340425531917, "lr_biases": 3.989361702127659e-06, "loss": 3539234.75, "time": 213}
