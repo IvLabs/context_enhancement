@@ -25,6 +25,8 @@ import wandb
 #from _config import Config 
 #config = Config.config
 
+os.environ['WANDB_START_METHOD'] = 'thread'
+
 #setting random seeds
 SEED = 4444
 
@@ -179,7 +181,7 @@ def main_worker(gpu, args):
             optimizer.zero_grad()
             with torch.cuda.amp.autocast():
                 loss = model.forward(y1, y2)
-#                print(loss.item())
+#               print(loss.item())
                 epoch_loss += loss.item()
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -193,7 +195,7 @@ def main_worker(gpu, args):
                                  time=int(time.time() - start_time))
                     print(json.dumps(stats))
                     print(json.dumps(stats), file=stats_file)
-        wandb.log(epoch_loss)
+        wandb.log({"epoch_loss":epoch_loss})
         if args.rank == 0:
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
