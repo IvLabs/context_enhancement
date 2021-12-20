@@ -202,7 +202,7 @@ def main_worker(gpu, args):
             state = dict(epoch=epoch + 1, model=model.state_dict(),
                          optimizer=optimizer.state_dict())
             torch.save(state, args.checkpoint_dir / 'checkpoint.pth')
-    
+    wandb.finish()
     # if args.rank == 0:
     #     # save final model
     #     torch.save(model.module.backbone.state_dict(),
