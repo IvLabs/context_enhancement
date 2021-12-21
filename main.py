@@ -59,7 +59,7 @@ parser.add_argument('--lambd', default=0.0051, type=float, metavar='L',
                     help='weight on off-diagonal terms')
 
 # Model parameters:
-parser.add_argument('--projector', default='8192-8192-8192', type=str,
+parser.add_argument('--projector', default='768-768', type=str,
                     metavar='MLP', help='projector MLP')
 parser.add_argument('--print-freq', default=100, type=int, metavar='N',
                     help='print frequency')
