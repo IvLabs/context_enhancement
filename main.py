@@ -129,7 +129,7 @@ def main_worker(gpu, args):
 
     transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
     t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
-    model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert-out-size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
+    model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
