@@ -43,11 +43,11 @@ parser = argparse.ArgumentParser(description='Barlow Twins Training')
 #                     help='path to dataset')
 
 # Training parameters: 
-parser.add_argument('--workers', default=8, type=int, metavar='N',
+parser.add_argument('--workers', default=2, type=int, metavar='N',
                     help='number of data loader workers')
-parser.add_argument('--epochs', default=2, type=int, metavar='N',
+parser.add_argument('--epochs', default=20, type=int, metavar='N',
                     help='number of total epochs to run')
-parser.add_argument('--batch-size', default=8, type=int, metavar='N',
+parser.add_argument('--batch-size', default=64, type=int, metavar='N',
                     help='mini-batch size')
 parser.add_argument('--learning-rate-weights', default=0.2, type=float, metavar='LR',
                     help='base learning rate for weights')
@@ -57,6 +57,8 @@ parser.add_argument('--weight-decay', default=1e-6, type=float, metavar='W',
                     help='weight decay')
 parser.add_argument('--lambd', default=0.0051, type=float, metavar='L',
                     help='weight on off-diagonal terms')
+parser.add_argument('--clip', default=1, type=float, metavar='GC',
+                    help='Gradient Clipping')
 
 # Model parameters:
 parser.add_argument('--projector', default='768-768', type=str,
@@ -67,11 +69,11 @@ parser.add_argument('--print-freq', default=100, type=int, metavar='N',
 # Transformer parameters: 
 parser.add_argument('--dmodel', default=768, type=int, metavar='T', 
                     help='dimension of transformer encoder')
-parser.add_argument('--nhead', default=6, type= int, metavar='N', 
+parser.add_argument('--nhead', default=3, type= int, metavar='N', 
                     help= 'number of heads in transformer') 
 parser.add_argument('--dfeedforward', default=256, type=int, metavar='F', 
                     help= 'dimension of feedforward layer in transformer encoder') 
-parser.add_argument('--nlayers', default=6, type=int, metavar= 'N', 
+parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
 
 # Tokenizer: 
@@ -119,6 +121,8 @@ def main_worker(gpu, args):
 
     if args.rank == 0:
         wandb.init(project="test")#############################################
+        # wandb.finish()
+        # exit()
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
         stats_file = open(args.checkpoint_dir / 'stats.txt', 'a', buffering=1)
         print(' '.join(sys.argv))
@@ -144,21 +148,25 @@ def main_worker(gpu, args):
     optimizer = LARS(parameters, lr=0, weight_decay=args.weight_decay,
                      weight_decay_filter=True,
                      lars_adaptation_filter=True)
+    # optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
 
     # automatically resume from checkpoint if it exists
     if (args.checkpoint_dir / 'checkpoint.pth').is_file():
         ckpt = torch.load(args.checkpoint_dir / 'checkpoint.pth',
                           map_location='cpu')
         start_epoch = ckpt['epoch']
+        print("model=",model)
+        print("ckpt=",ckpt['model'])
         model.load_state_dict(ckpt['model'])
         optimizer.load_state_dict(ckpt['optimizer'])
     else:
-        start_epoch = 0
+      start_epoch = 0
 
     ################################
     # dataset = torchvision.datasets.ImageFolder(args.data / 'train', Transform())
     # sampler = torch.utils.data.distributed.DistributedSampler(dataset)
     ###############################
+
     dataset = Translation_dataset()
     sampler = torch.utils.data.distributed.DistributedSampler(dataset)
 
@@ -185,6 +193,7 @@ def main_worker(gpu, args):
 #               print(loss.item())
                 epoch_loss += loss.item()
             scaler.scale(loss).backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
             scaler.step(optimizer)
             scaler.update()
             if step % args.print_freq == 0:
@@ -283,8 +292,11 @@ class BarlowTwins(nn.Module):
         y = self.transformer_enc(y["last_hidden_state"]) 
         y = torch.sum(y, dim=1)/y.shape[1] # using avg pooling 
 
-        x = self.bn(self.projector(x)) #x = [batch_size, projector]
-        y = self.bn(self.projector(y)) #y = [batch_size, projector]
+        x = self.projector(x) #x = [batch_size, projector]
+        x = self.bn(x)
+        print(x.shape)
+        y = self.projector(y)
+        y = self.bn(y) #y = [batch_size, projector]
 
         #emperical cross-correlation mattrix 
         c = x.T @ y
