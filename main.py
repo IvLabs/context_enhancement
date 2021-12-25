@@ -38,14 +38,18 @@ torch.cuda.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
 
+
+
 parser = argparse.ArgumentParser(description='Barlow Twins Training')
 # parser.add_argument('data', type=Path, metavar='DIR',
 #                     help='path to dataset')
 
+
+
 # Training parameters: 
 parser.add_argument('--workers', default=2, type=int, metavar='N',
                     help='number of data loader workers')
-parser.add_argument('--epochs', default=20, type=int, metavar='N',
+parser.add_argument('--epochs', default=2, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('--batch-size', default=64, type=int, metavar='N',
                     help='mini-batch size')
@@ -120,7 +124,10 @@ def main_worker(gpu, args):
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
-        wandb.init(project="test")#############################################
+        wandb.init(config=args)#############################################
+        # wandb.config.update(args)
+        config = wandb.config
+        print(args.lambd,config.lambd)
         # wandb.finish()
         # exit()
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -151,16 +158,16 @@ def main_worker(gpu, args):
     # optimizer = torch.optim.Adam(model.parameters(),lr=0.001)
 
     # automatically resume from checkpoint if it exists
-    if (args.checkpoint_dir / 'checkpoint.pth').is_file():
-        ckpt = torch.load(args.checkpoint_dir / 'checkpoint.pth',
-                          map_location='cpu')
-        start_epoch = ckpt['epoch']
-        print("model=",model)
-        print("ckpt=",ckpt['model'])
-        model.load_state_dict(ckpt['model'])
-        optimizer.load_state_dict(ckpt['optimizer'])
-    else:
-      start_epoch = 0
+    # if (args.checkpoint_dir / 'checkpoint.pth').is_file():
+    #     ckpt = torch.load(args.checkpoint_dir / 'checkpoint.pth',
+    #                       map_location='cpu')
+    #     start_epoch = ckpt['epoch']
+    #     # print("model=",model)
+    #     # print("ckpt=",ckpt['model'])
+    #     model.load_state_dict(ckpt['model'])
+    #     optimizer.load_state_dict(ckpt['optimizer'])
+    # else:
+    start_epoch = 0
 
     ################################
     # dataset = torchvision.datasets.ImageFolder(args.data / 'train', Transform())
@@ -190,6 +197,7 @@ def main_worker(gpu, args):
             optimizer.zero_grad()
             with torch.cuda.amp.autocast():
                 loss = model.forward(y1, y2)
+                wandb.log({'iter_loss':loss})
 #               print(loss.item())
                 epoch_loss += loss.item()
             scaler.scale(loss).backward()
@@ -359,4 +367,12 @@ class LARS(optim.Optimizer):
 
 
 if __name__ == '__main__':
-    main()
+    try:  
+      main()
+    except KeyboardInterrupt:
+      print('Interrupted')
+      wandb.finish()
+      try:
+          sys.exit(0)
+      except SystemExit:
+          os._exit(0)
