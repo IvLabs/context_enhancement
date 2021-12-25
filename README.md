@@ -10,6 +10,14 @@ $ wandb login
 ```
 (This will prompt a link to the wandb auth key. Copy and paste it in the terminal.) 
 
+### 3. Hyperparameter sweeping: 
+```bash
+$ wandb sweep sweep.yaml
+```
+run the output of the above command which would be of following format: 
+```
+$ wandb agent <USERNAME/PROJECTNAME/SWEEPID>
+```
 ### 3. Run the main function:
 ```
 $ python main.py
