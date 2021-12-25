@@ -3,15 +3,29 @@ method: bayes
 metric: 
     name: epoch_loss
     goal: minimize
+
+description: 'trial2 learning q distributions' 
 parameters: 
-    learning-rate-weights:
-        min: 0.02
-        max: 0.8
-    learning-rate-biases: 
-        min: 0.003
-        max: 0.009
+
     lambd: 
+        distribution: 'q_uniform'
         min: 0
         max: 1
+        q: 0.05
+    
+    nhead:
+        distribution: 'q_uniform'
+        min: 2
+        max: 8
+        q: 2
+
+    nlayers:
+        distribution: 'q_uniform'
+        min: 2
+        max: 6
+        q: 2
+
+    
+
 
 
