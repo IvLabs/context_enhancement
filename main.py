@@ -47,7 +47,7 @@ parser = argparse.ArgumentParser(description='Barlow Twins Training')
 
 
 # Training parameters: 
-parser.add_argument('--workers', default=2, type=int, metavar='N',
+parser.add_argument('--workers', default=20, type=int, metavar='N',
                     help='number of data loader workers')
 parser.add_argument('--epochs', default=2, type=int, metavar='N',
                     help='number of total epochs to run')
@@ -311,11 +311,9 @@ class BarlowTwins(nn.Module):
 
         # for multi-gpu: sum cross correlation matrix between all gpus 
         #(uncomment below 2 lines      
-        '''
-        c.div_(self.args.batch_size)
-        torch.distributed.all_reduce(c)
         
-        '''
+        c.div_(args.batch_size)
+        torch.distributed.all_reduce(c)
  
         on_diag = torch.diagonal(c).add_(-1).pow_(2).sum()
         off_diag = off_diagonal(c).pow_(2).sum()
