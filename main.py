@@ -182,7 +182,7 @@ def main_worker(gpu, args):
     ###############################
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
-         pin_memory=True, sampler=sampler, collate_fn = MyCollate(), sampler=sampler)
+         pin_memory=True, sampler=sampler, collate_fn = MyCollate())
     #############################
     start_time = time.time()
     scaler = torch.cuda.amp.GradScaler()
