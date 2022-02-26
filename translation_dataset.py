@@ -51,7 +51,7 @@ class MyCollate:
       target.append(i['trg'].T)
     target = pad_sequence(target, batch_first=False, padding_value = self.pad_idx)
 
-    return source, target 
+    return source.squeeze(-1), target.squeeze(-1) 
 
 
 # dataset = Translation_dataset()
