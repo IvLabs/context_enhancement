@@ -138,7 +138,7 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
-    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
+    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=False)
     t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
     model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
