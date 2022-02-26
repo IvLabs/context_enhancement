@@ -44,12 +44,12 @@ class MyCollate:
     for i in batch:
       source.append(i['src'].T)
     #print(source[0].shape, source[1].shape)
-    source = pad_sequence(source, batch_first=True, padding_value=self.pad_idx)
+    source = pad_sequence(source, batch_first=False, padding_value=self.pad_idx)
 
     target = []
     for i in batch:
       target.append(i['trg'].T)
-    target = pad_sequence(target, batch_first=True, padding_value = self.pad_idx)
+    target = pad_sequence(target, batch_first=False, padding_value = self.pad_idx)
 
     return source, target 
 
