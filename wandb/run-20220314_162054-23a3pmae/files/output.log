@@ -1,0 +1,10 @@
+
+train_translation.py
+Reusing dataset opus_rf (C:\Users\Welcome\.cache\huggingface\datasets\opus_rf\de-en\1.0.0\3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x00000254E373BEE8>
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\context_enhancement\lib\site-packages\torch\utils\data\dataloader.py", line 1328, in __del__
+    self._shutdown_workers()
+  File "D:\Anaconda\envs\context_enhancement\lib\site-packages\torch\utils\data\dataloader.py", line 1295, in _shutdown_workers
+    if self._persistent_workers or self._workers_status[worker_id]:
+AttributeError: '_MultiProcessingDataLoaderIter' object has no attribute '_workers_status'

@@ -86,7 +86,7 @@ parser.add_argument('--tokenizer', default='bert-base-multilingual-cased', type=
 parser.add_argument('--mbert-out-size', default=768, type=int, metavar='MO', 
                     help='Dimension of mbert output')
 # Paths: 
-parser.add_argument('--checkpoint-dir', default='./checkpoint/', type=Path,
+parser.add_argument('--checkpoint_dir', default='./checkpoint/', type=Path,
                     metavar='DIR', help='path to checkpoint directory')
 
 args = parser.parse_args()
@@ -138,7 +138,7 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
-    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=False)
+    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
     t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
     model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
@@ -218,7 +218,7 @@ def main_worker(gpu, args):
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
                          optimizer=optimizer.state_dict())
-            torch.save(state, args.checkpoint_dir / 'checkpoint.pth')
+            torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
     wandb.finish()
     # if args.rank == 0:
     #     # save final model

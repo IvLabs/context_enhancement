@@ -1,0 +1,4 @@
+2022-03-17 14:28:37,932 INFO    MainThread:15128 [wandb_setup.py:_flush():71] setting env: {'start_method': 'thread'}
+2022-03-17 14:28:37,933 INFO    MainThread:15128 [wandb_setup.py:_flush():71] setting login settings: {}
+2022-03-17 14:28:37,933 INFO    MainThread:15128 [wandb_init.py:_log_setup():371] Logging user logs to D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220317_142837-24a5vtdd\logs\debug.log
+2022-03-17 14:28:37,933 INFO    MainThread:15128 [wandb_init.py:_log_setup():372] Logging internal logs to D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220317_142837-24a5vtdd\logs\debug-internal.log

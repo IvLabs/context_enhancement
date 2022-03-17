@@ -1,0 +1,5 @@
+2022-03-17 14:28:38,013 INFO    MainThread:15128 [backend.py:ensure_launched():222] started backend process with pid: 0
+2022-03-17 14:28:38,014 INFO    BackendThr:15128 [internal.py:wandb_internal():90] W&B internal server running at pid: 15128, started at: 2022-03-17 14:28:38.013222
+2022-03-17 14:28:38,025 INFO    MainThread:15128 [wandb_init.py:init():469] backend started and connected
+2022-03-17 14:28:38,058 DEBUG   MainThread:15128 [config_util.py:dict_from_config_file():102] no default config file found in config-defaults.yaml
+2022-03-17 14:28:38,059 INFO    MainThread:15128 [wandb_init.py:init():533] updated telemetry

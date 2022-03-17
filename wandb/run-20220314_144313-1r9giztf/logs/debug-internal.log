@@ -1,0 +1,91 @@
+2022-03-14 14:43:13,228 INFO    BackendThr:11860 [internal.py:wandb_internal():90] W&B internal server running at pid: 11860, started at: 2022-03-14 14:43:13.228622
+2022-03-14 14:43:13,228 INFO    MainThread:11860 [wandb_init.py:init():469] backend started and connected
+2022-03-14 14:43:13,229 DEBUG   MainThread:11860 [config_util.py:dict_from_config_file():102] no default config file found in config-defaults.yaml
+2022-03-14 14:43:13,231 INFO    MainThread:11860 [wandb_init.py:init():533] updated telemetry
+2022-03-14 14:43:13,232 INFO    WriterThread:11860 [datastore.py:open_for_write():77] open: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\run-1r9giztf.wandb
+2022-03-14 14:43:13,234 DEBUG   SenderThread:11860 [sender.py:send():234] send: header
+2022-03-14 14:43:13,280 INFO    MainThread:11860 [wandb_init.py:init():563] communicating current version
+2022-03-14 14:43:13,280 DEBUG   HandlerThread:11860 [handler.py:handle_request():130] handle_request: check_version
+2022-03-14 14:43:13,281 DEBUG   SenderThread:11860 [sender.py:send_request():248] send_request: check_version
+2022-03-14 14:43:13,434 INFO    MainThread:11860 [wandb_init.py:init():568] got version response upgrade_message: "wandb version 0.12.11 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-03-14 14:43:13,437 INFO    MainThread:11860 [wandb_init.py:init():578] communicating run to backend with 30 second timeout
+2022-03-14 14:43:13,438 DEBUG   SenderThread:11860 [sender.py:send():234] send: run
+2022-03-14 14:43:13,930 INFO    MainThread:11860 [wandb_init.py:init():606] starting run threads in backend
+2022-03-14 14:43:13,931 DEBUG   HandlerThread:11860 [handler.py:handle_request():130] handle_request: run_start
+2022-03-14 14:43:13,934 INFO    SenderThread:11860 [dir_watcher.py:__init__():169] watching files in: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files
+2022-03-14 14:43:13,934 INFO    SenderThread:11860 [sender.py:_start_run_threads():807] run started: 1r9giztf with start time 1647249193
+2022-03-14 14:43:13,934 DEBUG   SenderThread:11860 [sender.py:send():234] send: summary
+2022-03-14 14:43:13,934 INFO    SenderThread:11860 [sender.py:_save_file():939] saving file wandb-summary.json with policy end
+2022-03-14 14:43:13,947 DEBUG   HandlerThread:11860 [meta.py:__init__():40] meta init
+2022-03-14 14:43:13,947 DEBUG   HandlerThread:11860 [meta.py:__init__():54] meta init done
+2022-03-14 14:43:13,947 DEBUG   HandlerThread:11860 [meta.py:probe():214] probe
+2022-03-14 14:43:13,956 DEBUG   HandlerThread:11860 [meta.py:_setup_git():204] setup git
+2022-03-14 14:43:14,049 DEBUG   HandlerThread:11860 [meta.py:_setup_git():211] setup git done
+2022-03-14 14:43:14,049 DEBUG   HandlerThread:11860 [meta.py:_save_pip():58] save pip
+2022-03-14 14:43:14,050 DEBUG   HandlerThread:11860 [meta.py:_save_pip():72] save pip done
+2022-03-14 14:43:14,050 DEBUG   HandlerThread:11860 [meta.py:_save_conda():79] save conda
+2022-03-14 14:43:14,949 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_created():217] file/dir created: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\wandb-summary.json
+2022-03-14 14:43:14,950 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_created():217] file/dir created: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\conda-environment.yaml
+2022-03-14 14:43:14,950 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_created():217] file/dir created: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\requirements.txt
+2022-03-14 14:43:16,191 DEBUG   HandlerThread:11860 [meta.py:_save_conda():89] save conda done
+2022-03-14 14:43:16,192 DEBUG   HandlerThread:11860 [meta.py:probe():252] probe done
+2022-03-14 14:43:16,196 DEBUG   SenderThread:11860 [sender.py:send():234] send: files
+2022-03-14 14:43:16,196 INFO    SenderThread:11860 [sender.py:_save_file():939] saving file wandb-metadata.json with policy now
+2022-03-14 14:43:16,216 DEBUG   HandlerThread:11860 [handler.py:handle_request():130] handle_request: stop_status
+2022-03-14 14:43:16,217 DEBUG   SenderThread:11860 [sender.py:send_request():248] send_request: stop_status
+2022-03-14 14:43:16,217 INFO    MainThread:11860 [wandb_run.py:_console_start():1810] atexit reg
+2022-03-14 14:43:16,222 INFO    MainThread:11860 [wandb_run.py:_redirect():1684] redirect: SettingsConsole.WRAP
+2022-03-14 14:43:16,222 INFO    MainThread:11860 [wandb_run.py:_redirect():1721] Wrapping output streams.
+2022-03-14 14:43:16,225 INFO    MainThread:11860 [wandb_run.py:_redirect():1745] Redirects installed.
+2022-03-14 14:43:16,225 INFO    MainThread:11860 [wandb_init.py:init():633] run started, returning control to user process
+2022-03-14 14:43:16,957 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_modified():230] file/dir modified: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\conda-environment.yaml
+2022-03-14 14:43:16,957 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_created():217] file/dir created: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log
+2022-03-14 14:43:16,957 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_created():217] file/dir created: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\wandb-metadata.json
+2022-03-14 14:43:17,368 INFO    Thread-22 :11860 [upload_job.py:push():137] Uploaded file C:\Users\Welcome\AppData\Local\Temp\tmpffh5mm2qwandb\2rspy88n-wandb-metadata.json
+2022-03-14 14:43:18,984 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_modified():230] file/dir modified: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log
+2022-03-14 14:43:20,443 WARNING MsgRouterThr:11860 [router.py:message_loop():73] EOFError seen in message_loop
+2022-03-14 14:43:20,450 INFO    MainThread:11860 [wandb_run.py:_atexit_cleanup():1780] got exitcode: 1
+2022-03-14 14:43:20,450 INFO    MainThread:11860 [wandb_run.py:_restore():1752] restore
+2022-03-14 14:43:20,996 INFO    Thread-17 :11860 [dir_watcher.py:_on_file_modified():230] file/dir modified: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log
+2022-03-14 14:43:21,244 INFO    WriterThread:11860 [datastore.py:close():281] close: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\run-1r9giztf.wandb
+2022-03-14 14:43:21,244 INFO    SenderThread:11860 [sender.py:finish():1070] shutting down sender
+2022-03-14 14:43:21,244 INFO    SenderThread:11860 [dir_watcher.py:finish():283] shutting down directory watcher
+2022-03-14 14:43:22,002 INFO    SenderThread:11860 [dir_watcher.py:_on_file_modified():230] file/dir modified: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log
+2022-03-14 14:43:22,003 INFO    SenderThread:11860 [dir_watcher.py:finish():313] scan: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files
+2022-03-14 14:43:22,003 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\conda-environment.yaml conda-environment.yaml
+2022-03-14 14:43:22,003 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\config.yaml config.yaml
+2022-03-14 14:43:22,004 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log output.log
+2022-03-14 14:43:22,009 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\requirements.txt requirements.txt
+2022-03-14 14:43:22,014 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\wandb-metadata.json wandb-metadata.json
+2022-03-14 14:43:22,016 INFO    SenderThread:11860 [dir_watcher.py:finish():327] scan save: D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\wandb-summary.json wandb-summary.json
+2022-03-14 14:43:22,020 INFO    SenderThread:11860 [file_pusher.py:finish():177] shutting down file pusher
+2022-03-14 14:43:22,020 INFO    SenderThread:11860 [file_pusher.py:join():182] waiting for file pusher
+2022-03-14 14:43:23,061 INFO    Thread-32 :11860 [upload_job.py:push():137] Uploaded file D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\requirements.txt
+2022-03-14 14:43:23,087 INFO    Thread-29 :11860 [upload_job.py:push():137] Uploaded file D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\conda-environment.yaml
+2022-03-14 14:43:23,096 INFO    Thread-31 :11860 [upload_job.py:push():137] Uploaded file D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\output.log
+2022-03-14 14:43:23,106 INFO    Thread-30 :11860 [upload_job.py:push():137] Uploaded file D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\config.yaml
+2022-03-14 14:43:23,110 INFO    Thread-33 :11860 [upload_job.py:push():137] Uploaded file D:\context_enhancement\context-main\combined\context_enhancement\wandb\run-20220314_144313-1r9giztf\files\wandb-summary.json
+2022-03-14 14:43:23,890 ERROR   BackendThr:11860 [internal.py:wandb_internal():158] Thread HandlerThread:
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\context_enhancement\lib\multiprocessing\connection.py", line 302, in _recv_bytes
+    overlapped=True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\context_enhancement\lib\site-packages\wandb\sdk\internal\internal_util.py", line 52, in run
+    self._run()
+  File "D:\Anaconda\envs\context_enhancement\lib\site-packages\wandb\sdk\internal\internal_util.py", line 99, in _run
+    record = self._input_record_q.get(timeout=1)
+  File "D:\Anaconda\envs\context_enhancement\lib\multiprocessing\queues.py", line 108, in get
+    res = self._recv_bytes()
+  File "D:\Anaconda\envs\context_enhancement\lib\multiprocessing\connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "D:\Anaconda\envs\context_enhancement\lib\multiprocessing\connection.py", line 321, in _recv_bytes
+    raise EOFError
+EOFError
+2022-03-14 14:43:26,350 INFO    MainThread:11860 [wandb_run.py:_wait_for_finish():1912] got exit ret: None
+2022-03-14 14:43:26,458 INFO    MainThread:11860 [wandb_run.py:_restore():1752] restore
+2022-03-14 14:43:26,483 INFO    MainThread:11860 [internal.py:handle_exit():77] Internal process exited
