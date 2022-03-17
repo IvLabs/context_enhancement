@@ -1,25 +1,55 @@
+import torch 
 from datasets import load_dataset
 from transformers import AutoTokenizer 
 # from _config import Config as config 
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader, Dataset
 
+import translation_utils
+from translation_utils import vocab 
 
-tokenizer = AutoTokenizer.from_pretrained('bert-base-multilingual-cased')
 
 class Translation_dataset(Dataset):
     
     def __init__(self):
       
-        self.dataset = load_dataset('wmt14', "de-en", split="test") 
+        self.dataset = load_dataset('opus_rf', "de-en", split="train") 
         self.de_list = []
         self.en_list = []
+#        self.tokenizer = tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained('bert-base-multilingual-cased')
+        dataset = load_dataset('opus_rf', 'de-en', split='train')
+        en_list_2 = []
+        for n, i in enumerate(dataset): 
+            en_list_2.append(i['translation']['en'].lower())
 
+        a1 = list(self.tokenizer(en_list_2, padding=True, return_tensors='pt')['input_ids'])
+        self.en_vocab, en_vocab_size = vocab(a1)
+        self.bert2id_dict = translation_utils.bert2id(en_vocab)
+        
         for i in self.dataset: 
-            self.de_list.append(tokenizer(i['translation']['de'].lower(), padding=True, return_tensors='pt')["input_ids"])
-            self.en_list.append(tokenizer(i['translation']['en'].lower(), padding=True, return_tensors='pt')["input_ids"])
+            self.de_list.append(self.tokenizer(i['translation']['de'].lower(), 
+                        padding=True, return_tensors='pt')["input_ids"])
+            self.en_list.append(self.tokenizer(i['translation']['en'].lower(), 
+                        padding=True, return_tensors='pt')["input_ids"])
             
+        # en_list_id = []
+        # for i in self.dataset: 
+        #     en_list_id.append(i['translation']['en'].lower())
+        de_list_1 = []
+        for n,i in enumerate(self.dataset): 
+          de_list_1.append(i['translation']['de'].lower())
 
+        a = list(self.tokenizer(de_list_1, padding=True, return_tensors='pt')['input_ids'])
+
+        en_list_1 = []
+        for n,i in enumerate(self.dataset): 
+          en_list_1.append(i['translation']['en'].lower())
+
+        b = list(self.tokenizer(de_list_1, padding=True, return_tensors='pt')['input_ids'])
+        en_vocab, self.en_vocab_size = vocab(b)
+        de_vocab, self.de_vocab_size = vocab(a) 
+            
   
   #should return the length of the dataset  
     def __len__(self): 
@@ -35,8 +65,12 @@ class Translation_dataset(Dataset):
 
 
 class MyCollate:
-  def __init__(self):
-    self.pad_idx = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
+  def __init__(self, 
+          tokenizer, 
+          bert2id_dict: dict):
+    self.tokenzier = tokenizer
+    self.pad_idx = self.tokenizer.convert_tokens_to_ids(self.tokenizer.pad_token)
+    self.bert2id_dict = bert2id_dict 
 
   def __call__(self, batch):
 
@@ -50,8 +84,20 @@ class MyCollate:
     for i in batch:
       target.append(i['trg'].T)
     target = pad_sequence(target, batch_first=False, padding_value = self.pad_idx)
+    
+    target_inp = target.squeeze(-1)[:-1, :]
+    target_out = torch.zeros(target.shape)
 
-    return source.squeeze(-1), target.squeeze(-1) 
+    for i in range(len(target)): 
+        for j in range(len(target[i])): 
+            try: 
+                target_out[i][j] = self.bert2id_dict[target[i][j].item()]
+            except KeyError: 
+                target_out[i][j] = self.tokenizer.unk_token_id
+
+    target_out = target_out.squeeze(-1)[1:, :]
+
+    return source.squeeze(), target.squeeze().long(), target_inp.squeeze().long(), target_out.squeeze().long()  
 
 
 # dataset = Translation_dataset()
