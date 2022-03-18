@@ -40,6 +40,10 @@ def create_mask(src, tgt, pad_idx):
 
     PAD_IDX = pad_idx
 
+    # print(src.shape, tgt.shape)
+    if len(src.shape) == 1: 
+        src = src.unsqueeze(-1)
+        tgt = tgt.unsqueeze(-1)
     src_seq_len = src.shape[0]
     tgt_seq_len = tgt.shape[0]
 
@@ -84,4 +88,6 @@ class TokenEmbedding(nn.Module):
 
     def forward(self, tokens: torch.tensor):
         # print(tokens.shape)
+        if len(tokens.shape) ==1: 
+            tokens  = tokens.unsqueeze(-1)
         return self.embedding(tokens.long().T)['last_hidden_state'].permute(1, 0, 2) * math.sqrt(self.emb_size)

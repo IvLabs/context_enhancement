@@ -25,7 +25,7 @@ class Translation_dataset(Dataset):
 
         a1 = list(self.tokenizer(en_list_2, padding=True, return_tensors='pt')['input_ids'])
         self.en_vocab, en_vocab_size = vocab(a1)
-        self.bert2id_dict = translation_utils.bert2id(en_vocab)
+        self.bert2id_dict = translation_utils.bert2id(self.en_vocab)
         
         for i in self.dataset: 
             self.de_list.append(self.tokenizer(i['translation']['de'].lower(), 
@@ -68,7 +68,7 @@ class MyCollate:
   def __init__(self, 
           tokenizer, 
           bert2id_dict: dict):
-    self.tokenzier = tokenizer
+    self.tokenizer = tokenizer
     self.pad_idx = self.tokenizer.convert_tokens_to_ids(self.tokenizer.pad_token)
     self.bert2id_dict = bert2id_dict 
 

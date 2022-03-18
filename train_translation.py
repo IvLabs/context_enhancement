@@ -41,9 +41,9 @@ parser = argparse.ArgumentParser(description = 'Translation')
 # Training hyper-parameters: 
 parser.add_argument('--workers', default=4, type=int, metavar='N', 
                     help='number of data loader workers') 
-parser.add_argument('--epochs', default=2, type=int, metavar='N',
+parser.add_argument('--epochs', default=10, type=int, metavar='N',
                     help='number of total epochs to run')
-parser.add_argument('--batch-size', default=64, type=int, metavar='n',
+parser.add_argument('--batch-size', default=8, type=int, metavar='n',
                     help='mini-batch size')
 parser.add_argument('--learning-rate', default=0.2, type=float, metavar='LR',
                     help='base learning rate')
@@ -63,7 +63,7 @@ parser.add_argument('--loss_fn', default='cross_entropy', type=str, metavar='LF'
 # Transformer parameters: 
 parser.add_argument('--dmodel', default=768, type=int, metavar='T', 
                     help='dimension of transformer encoder')
-parser.add_argument('--nhead', default=3, type= int, metavar='N', 
+parser.add_argument('--nhead', default=4, type= int, metavar='N', 
                     help= 'number of heads in transformer') 
 parser.add_argument('--dfeedforward', default=256, type=int, metavar='F', 
                     help= 'dimension of feedforward layer in transformer encoder') 
@@ -120,9 +120,10 @@ def main_worker(gpu, args):
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
-#        wandb.init(config=args, project='translation_test')#############################################
+        
+        wandb.init(config=args, project='translation_test')#############################################
         # wandb.config.update(args)
-#        config = wandb.config
+        config = wandb.config
     
         # exit()
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -196,7 +197,7 @@ def main_worker(gpu, args):
             optimizer.step()
             # losses += loss.item()
             
-#            wandb.log({'iter_loss': loss})
+            wandb.log({'iter_loss': loss})
             epoch_loss += loss.item()
             torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
             
@@ -206,13 +207,13 @@ def main_worker(gpu, args):
                                  time=int(time.time() - start_time))
                     print(json.dumps(stats))
                     print(json.dumps(stats), file=stats_file)
-#        wandb.log({"epoch_loss":epoch_loss})
+        wandb.log({"epoch_loss":epoch_loss})
         if args.rank == 0:
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
                          optimizer=optimizer.state_dict())
-            torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
-#    wandb.finish()
+            # torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
+    wandb.finish()
            
 
 class Translator(nn.Module): 
