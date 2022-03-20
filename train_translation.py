@@ -134,7 +134,7 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
-    dataset = Translation_dataset() 
+    dataset = Translation_dataset(train=True) 
     src_vocab_size = dataset.de_vocab_size
     trg_vocab_size = dataset.en_vocab_size
     tokenizer = dataset.tokenizer  
@@ -274,29 +274,41 @@ class Translator(nn.Module):
 todo: 
     BLEU score
 '''
-#def greedy_decode(model, 
-#        src: Tensor, 
-#        src_mask: Tensor, 
-#        max_len: int, 
-#        start_symbol: str): 
-#
-#    src = src.cuda(gpu, non_blocking=True) 
-#    src_mask = src_mask.cuda(gpu, non_blocking=True)
-#
-#    memory = model.encode(src, src_mask) 
-#    ys = torch.ones(1,1).fill_(start_symbol).type(torch.long).cuda(gpu, non_blocking=True) 
-#
-#    for i in range(max_len-1): 
-#        memory = memory.cuda(gpu, non_blocking=True) 
-#        tgt_mask = translation_utils.generate_square_subsequent_mask(ys.size(0)).type(torch.bool)).cuda(gpu, non_blocking=True) 
-#        out = out.transpose(0,1)
-#        prob = model.generator(out[:, -1])
-#        _, next_word = torch.max(prob, dim=1) 
-#        next_word = next_word.item()
-#
-#        ys = torch.cat([ys, 
-#            torch.ones(1,1).type_as(src.data).fill_(next_word)], dim=0)
-#        ext_word == tokenizer.convert_ids_to_tokens(eos_idx)  
+
+# function to generate output sequence using greedy algorithm 
+def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx):
+    src = src.cuda(gpu, non_blocking=True)
+    src_mask = src_mask.cuda(gpu, non_blocking=True)
+
+    memory = model.encode(src, src_mask)
+    ys = torch.ones(1, 1).fill_(start_symbol).type(torch.long).cuda(gpu, non_blocking=True)
+    for i in range(max_len-1):
+        memory = memory.cuda(gpu, non_blocking=True)
+        tgt_mask = (translation_utils.generate_square_subsequent_mask(ys.size(0))
+                    .type(torch.bool)).cuda(gpu, non_blocking=True)
+        out = model.decode(ys, memory, tgt_mask)
+        out = out.transpose(0, 1)
+        prob = model.generator(out[:, -1])
+        _, next_word = torch.max(prob, dim=1)
+        next_word = next_word.item()
+
+        ys = torch.cat([ys,
+                        torch.ones(1, 1).type_as(src.data).fill_(next_word)], dim=0)
+        if next_word == eos_idx:
+            break
+    return ys
+
+
+# actual function to translate input sentence into target language
+def translate(model: torch.nn.Module, 
+        src: torch.tensor, 
+        tokenizer):
+    model.eval()
+    num_tokens = src.shape[0]
+    src_mask = (torch.zeros(num_tokens, num_tokens)).type(torch.bool)
+    tgt_tokens = greedy_decode(
+        model,  src, src_mask, max_len=num_tokens + 5, start_symbol=tokenizer.cls_token, eos_idx=tokenizer.sep_token).flatten()
+    return tokenizer.convert_ids_to_tokens(tgt_tokens) 
 
 if __name__ == '__main__': 
     main()

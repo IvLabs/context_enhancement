@@ -11,9 +11,14 @@ from translation_utils import vocab
 
 class Translation_dataset(Dataset):
     
-    def __init__(self):
+    def __init__(self, 
+            train: bool = True):
       
-        self.dataset = load_dataset('opus_rf', "de-en", split="train") 
+        if train: 
+            split = "train" 
+        else: 
+            split = "test" 
+        self.dataset = load_dataset('opus_rf', "de-en", split=split) 
         self.de_list = []
         self.en_list = []
 #        self.tokenizer = tokenizer

@@ -2,9 +2,10 @@ import torch
 import torch.nn as nn 
 import  math 
 import transformers 
-from transformers import XLMRobertaModel 
+from transformers import BertModel 
 
-mbert = XLMRobertaModel.from_pretrained('xlm-roberta-base')
+
+model = BertModel.from_pretrained("bert-base-uncased")
 
 def vocab(en_list: torch.tensor): 
     # a = list(tokenizer(en_list, padding=True, return_tensors='pt')[
