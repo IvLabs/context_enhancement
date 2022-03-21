@@ -26,7 +26,7 @@ from torch import Tensor
 # from torchtext.metrics import bleu_score
 import wandb 
 
-import barlow
+import main
 
 os.environ['WANDB_START_METHOD'] = 'thread'
 
@@ -71,8 +71,6 @@ parser.add_argument('--dfeedforward', default=256, type=int, metavar='F',
                     help= 'dimension of feedforward layer in transformer encoder') 
 parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
-parser.add_argument('--projector', default='768-768', type=str,
-                    metavar='MLP', help='projector MLP')
 
 # Tokenizer: 
 parser.add_argument('--tokenizer', default='bert-base-multilingual-cased', type=str, 
@@ -149,14 +147,6 @@ def main_worker(gpu, args):
 #    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
     # t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
     model = Translator(src_vocab_size = src_vocab_size, tgt_vocab_size=trg_vocab_size).cuda(gpu)
-    model_barlow = barlow.BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=model.transformer.encoder, lambd=args.lambd).cuda(gpu)
-    '''
-    to_do: 
-    if post_train: 
-        torch.load(model.states_dict)
-        model.transformer.encoder = model_barlow
-
-    '''
 #    model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
