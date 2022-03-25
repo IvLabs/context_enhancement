@@ -299,12 +299,12 @@ class BarlowTwins(nn.Module):
         x = x.squeeze(-1)
         #print(x.shape)
         x = self.mbert(x)
-        x = self.transformer_enc(x["last_hidden_state"]).permute(1, 0, 2)) 
+        x = self.transformer_enc(x["last_hidden_state"]).permute(1, 0, 2)
         x = torch.sum(x, dim=0)/x.shape[1] # using avg pooling 
         
         y = y.squeeze(-1)
         y = self.mbert(y)
-        y = self.transformer_enc(y["last_hidden_state"]).permute(1, 0, 2)) 
+        y = self.transformer_enc(y["last_hidden_state"]).permute(1, 0, 2) 
         y = torch.sum(y, dim=0)/y.shape[1] # using avg pooling 
 
         x = self.projector(x) #x = [batch_size, projector]

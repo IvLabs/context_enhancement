@@ -23,7 +23,7 @@ from translation_utils import create_mask
 from transformers import BertModel 
 from transformers import AutoTokenizer
 from torch import Tensor
-from torchtext.data.metrics import bleu_score
+# from torchtext.metrics import bleu_score
 import wandb 
 
 #import barlow
@@ -71,7 +71,7 @@ parser.add_argument('--dfeedforward', default=256, type=int, metavar='F',
                     help= 'dimension of feedforward layer in transformer encoder') 
 parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
-parser.add_argument('--projector', default='768-256', type=str,
+parser.add_argument('--projector', default='768-768', type=str,
                     metavar='MLP', help='projector MLP')
 
 # Tokenizer: 
@@ -124,9 +124,9 @@ def main_worker(gpu, args):
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
-
+        
         wandb.init(config=args, project='translation_test')#############################################
-        wandb.config.update(args)
+        # wandb.config.update(args)
         config = wandb.config
     
         # exit()
@@ -180,8 +180,8 @@ def main_worker(gpu, args):
 
     sampler = torch.utils.data.distributed.DistributedSampler(dataset)
 
-    assert args.batch-size % args.world_size == 0
-    per_device_batch_size = args.batch-size // args.world_size
+    assert args.batch_size % args.world_size == 0
+    per_device_batch_size = args.batch_size // args.world_size
     ###############################
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
@@ -277,8 +277,7 @@ class Translator(nn.Module):
                                    dim_feedforward=dim_feedforward, 
                                    dropout=dropout)
         self.generator = nn.Linear(emb_size, tgt_vocab_size) 
-        self.mbert = BertModel.from_pretrained('bert-base-multilingual-cased')
-        self.tok_emb = TokenEmbedding(emb_size = emb_size, mbert=self.mbert)
+        self.tok_emb = TokenEmbedding(emb_size = emb_size)
         # self.trg_tok_emb = TokenEmbedding(tgt_vocab_size, emb_size)
         # self.positional_encoding = PositionalEncoding(emb_size, dropout=args.dropout)
 

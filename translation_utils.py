@@ -77,7 +77,7 @@ class PositionalEncoding(nn.Module):
 
 # helper Module to convert tensor of input indices into corresponding tensor of token embeddings
 class TokenEmbedding(nn.Module):
-    def __init__(self, emb_size):
+    def __init__(self, emb_size, mbert):
         super(TokenEmbedding, self).__init__()
         # self.embedding = nn.Embedding(vocab_size, emb_size)
         self.embedding = mbert

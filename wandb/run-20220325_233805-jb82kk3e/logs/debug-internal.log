@@ -1,0 +1,93 @@
+2022-03-25 23:38:05,639 INFO    wandb_internal:2330 [internal.py:wandb_internal():91] W&B internal server running at pid: 2330, started at: 2022-03-25 23:38:05.638211
+2022-03-25 23:38:05,639 INFO    MainThread:2330 [backend.py:ensure_launched():137] started backend process with pid: 0
+2022-03-25 23:38:05,640 INFO    MainThread:2330 [wandb_init.py:init():423] backend started and connected
+2022-03-25 23:38:05,640 DEBUG   MainThread:2330 [config_util.py:dict_from_config_file():101] no default config file found in config-defaults.yaml
+2022-03-25 23:38:05,644 INFO    MainThread:2330 [wandb_init.py:init():465] updated telemetry
+2022-03-25 23:38:05,644 INFO    MainThread:2330 [wandb_init.py:init():484] communicating current version
+2022-03-25 23:38:05,644 DEBUG   SenderThread:2330 [sender.py:send():179] send: header
+2022-03-25 23:38:05,644 INFO    WriterThread:2330 [datastore.py:open_for_write():77] open: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/run-jb82kk3e.wandb
+2022-03-25 23:38:05,645 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: check_version
+2022-03-25 23:38:05,645 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: check_version
+2022-03-25 23:38:06,082 INFO    MainThread:2330 [wandb_init.py:init():489] got version response upgrade_message: "wandb version 0.12.11 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-03-25 23:38:06,082 INFO    MainThread:2330 [wandb_init.py:init():497] communicating run to backend with 30 second timeout
+2022-03-25 23:38:06,083 DEBUG   SenderThread:2330 [sender.py:send():179] send: run
+2022-03-25 23:38:06,694 INFO    SenderThread:2330 [dir_watcher.py:__init__():168] watching files in: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files
+2022-03-25 23:38:06,694 INFO    SenderThread:2330 [sender.py:_start_run_threads():707] run started: jb82kk3e with start time 1648231685
+2022-03-25 23:38:06,694 DEBUG   SenderThread:2330 [sender.py:send():179] send: summary
+2022-03-25 23:38:06,695 INFO    SenderThread:2330 [sender.py:_save_file():829] saving file wandb-summary.json with policy end
+2022-03-25 23:38:06,695 INFO    MainThread:2330 [wandb_init.py:init():522] starting run threads in backend
+2022-03-25 23:38:06,696 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: run_start
+2022-03-25 23:38:06,698 DEBUG   HandlerThread:2330 [meta.py:__init__():39] meta init
+2022-03-25 23:38:06,698 DEBUG   HandlerThread:2330 [meta.py:__init__():53] meta init done
+2022-03-25 23:38:06,698 DEBUG   HandlerThread:2330 [meta.py:probe():210] probe
+2022-03-25 23:38:06,704 DEBUG   HandlerThread:2330 [meta.py:_setup_git():200] setup git
+2022-03-25 23:38:06,726 DEBUG   HandlerThread:2330 [meta.py:_setup_git():207] setup git done
+2022-03-25 23:38:06,726 DEBUG   HandlerThread:2330 [meta.py:_save_code():89] save code
+2022-03-25 23:38:06,736 DEBUG   HandlerThread:2330 [meta.py:_save_code():110] save code done
+2022-03-25 23:38:06,737 DEBUG   HandlerThread:2330 [meta.py:_save_patches():127] save patches
+2022-03-25 23:38:06,805 DEBUG   HandlerThread:2330 [meta.py:_save_patches():169] save patches done
+2022-03-25 23:38:06,805 DEBUG   HandlerThread:2330 [meta.py:_save_pip():57] save pip
+2022-03-25 23:38:06,805 DEBUG   HandlerThread:2330 [meta.py:_save_pip():71] save pip done
+2022-03-25 23:38:06,805 DEBUG   HandlerThread:2330 [meta.py:_save_conda():78] save conda
+2022-03-25 23:38:07,695 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/requirements.txt
+2022-03-25 23:38:07,695 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/conda-environment.yaml
+2022-03-25 23:38:07,695 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/code/train_translation.py
+2022-03-25 23:38:07,695 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/diff.patch
+2022-03-25 23:38:07,696 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/wandb-summary.json
+2022-03-25 23:38:07,696 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/code
+2022-03-25 23:38:07,929 DEBUG   HandlerThread:2330 [meta.py:_save_conda():86] save conda done
+2022-03-25 23:38:07,929 DEBUG   HandlerThread:2330 [meta.py:probe():252] probe done
+2022-03-25 23:38:07,931 DEBUG   SenderThread:2330 [sender.py:send():179] send: files
+2022-03-25 23:38:07,931 INFO    SenderThread:2330 [sender.py:_save_file():829] saving file wandb-metadata.json with policy now
+2022-03-25 23:38:07,931 INFO    SenderThread:2330 [sender.py:_save_file():829] saving file code/train_translation.py with policy now
+2022-03-25 23:38:07,931 INFO    SenderThread:2330 [sender.py:_save_file():829] saving file diff.patch with policy now
+2022-03-25 23:38:07,937 INFO    MainThread:2330 [wandb_run.py:_console_start():1538] atexit reg
+2022-03-25 23:38:07,937 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:38:07,939 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:38:07,941 INFO    MainThread:2330 [wandb_run.py:_redirect():1412] redirect: SettingsConsole.WRAP
+2022-03-25 23:38:07,942 INFO    MainThread:2330 [wandb_run.py:_redirect():1449] Wrapping output streams.
+2022-03-25 23:38:07,944 INFO    MainThread:2330 [wandb_run.py:_redirect():1473] Redirects installed.
+2022-03-25 23:38:07,944 INFO    MainThread:2330 [wandb_init.py:init():547] run started, returning control to user process
+2022-03-25 23:38:08,695 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/conda-environment.yaml
+2022-03-25 23:38:08,696 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/wandb-metadata.json
+2022-03-25 23:38:08,696 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/output.log
+2022-03-25 23:38:09,327 INFO    Thread-14 :2330 [upload_job.py:push():133] Uploaded file /tmp/tmpenp7_p4kwandb/mhw0d432-wandb-metadata.json
+2022-03-25 23:38:09,331 INFO    Thread-18 :2330 [upload_job.py:push():133] Uploaded file /tmp/tmpenp7_p4kwandb/3s5cp5cq-diff.patch
+2022-03-25 23:38:09,339 INFO    Thread-17 :2330 [upload_job.py:push():133] Uploaded file /tmp/tmpenp7_p4kwandb/240mii2l-code/train_translation.py
+2022-03-25 23:38:10,697 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/output.log
+2022-03-25 23:38:22,705 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/output.log
+2022-03-25 23:38:23,496 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:38:23,496 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:38:35,129 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:38:39,646 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:38:39,646 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:38:55,321 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:38:55,322 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:39:05,496 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:39:11,608 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:39:11,608 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:39:27,681 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:39:27,682 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:39:35,813 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:39:43,667 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:39:43,667 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:39:59,682 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:39:59,682 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:40:06,131 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:40:15,674 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:40:15,675 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:40:31,630 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:40:31,631 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:40:36,477 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:40:47,600 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:40:47,601 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:41:03,441 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:41:03,442 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:41:07,054 DEBUG   SenderThread:2330 [sender.py:send():179] send: stats
+2022-03-25 23:41:08,811 INFO    Thread-11 :2330 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_enhancement/wandb/run-20220325_233805-jb82kk3e/files/output.log
+2022-03-25 23:41:19,476 DEBUG   HandlerThread:2330 [handler.py:handle_request():124] handle_request: stop_status
+2022-03-25 23:41:19,477 DEBUG   SenderThread:2330 [sender.py:send_request():193] send_request: stop_status
+2022-03-25 23:41:30,876 DEBUG   SenderThread:2330 [sender.py:send():179] send: history
+2022-03-25 23:41:30,876 DEBUG   SenderThread:2330 [sender.py:send():179] send: summary
+2022-03-25 23:41:30,878 INFO    SenderThread:2330 [sender.py:_save_file():829] saving file wandb-summary.json with policy end
