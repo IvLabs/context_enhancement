@@ -1,0 +1,24 @@
+{
+    "os": "Linux-5.13.0-37-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.7.11",
+    "heartbeatAt": "2022-03-27T11:48:06.744421",
+    "startedAt": "2022-03-27T11:48:05.877818",
+    "docker": null,
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "gpu_count": 2,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/ivlabs/context_enhancement/context_enhancement/train_translation.py",
+    "codePath": "train_translation.py",
+    "git": {
+        "remote": "https://github.com/IvLabs/context_enhancement.git",
+        "commit": "d31c2b27d4f988b96adb090c3ef3b13d3c6422bd"
+    },
+    "email": "aneeshashetye@gmail.com",
+    "root": "/home/ivlabs/context_enhancement/context_enhancement",
+    "host": "hubble-02",
+    "username": "ivlabs",
+    "executable": "/home/ivlabs/miniconda3/envs/ectc/bin/python"
+}

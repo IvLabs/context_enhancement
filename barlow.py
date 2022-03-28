@@ -22,6 +22,8 @@ from transformers import AutoTokenizer
 from torch import nn, optim
 import torch
 
+import translation_dataset
+from train_translation import Translator 
 import wandb 
 #from _config import Config 
 #config = Config.config
@@ -115,9 +117,10 @@ def main():
         args.dist_url = 'tcp://localhost:58472'
         args.world_size = args.ngpus_per_node
     torch.multiprocessing.spawn(main_worker, (args,), args.ngpus_per_node)
-
+    
 
 def main_worker(gpu, args):
+    tokenizer = AutoTokenizer.from_pretrained('bert-base-multilingual-cased')
     args.rank += gpu
     torch.distributed.init_process_group(
         backend='nccl', init_method=args.dist_url,
@@ -142,12 +145,20 @@ def main_worker(gpu, args):
     t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
     '''
     to do: 
-    
     load translation trained model and get its transformer
     add post translation training after epochs 
-
     '''
+    dataset = Translation_dataset(train=True) 
+    src_vocab_size = dataset.de_vocab_size
+    trg_vocab_size = dataset.en_vocab_size
+
     model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, lambd=args.lambd).cuda(gpu)
+    translator = Translator(src_vocab_size = src_vocab_size, tgt_vocab_size=trg_vocab_size).cuda(gpu)
+    translator.load_state_dict(torch.load('path.pth'))
+    model.mbert = translator.mbert 
+    model.transformer_enc = translator.transformer.encoder 
+    ############### add path to saved model into path ############## 
+    # translator = Translator()
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
@@ -189,7 +200,7 @@ def main_worker(gpu, args):
     ###############################
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
-         pin_memory=True, sampler=sampler, collate_fn = MyCollate())
+         pin_memory=True, sampler=sampler, collate_fn = MyCollate(tokenizer=tokenizer,bert2id_dict=dataset.bert2id_dict))
     #############################
     start_time = time.time()
     scaler = torch.cuda.amp.GradScaler()

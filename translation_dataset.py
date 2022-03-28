@@ -29,7 +29,7 @@ class Translation_dataset(Dataset):
             en_list_2.append(i['translation']['en'].lower())
 
         a1 = list(self.tokenizer(en_list_2, padding=True, return_tensors='pt')['input_ids'])
-        self.en_vocab, en_vocab_size = vocab(a1)
+        self.en_vocab, self.en_vocab_size = vocab(a1)
         self.bert2id_dict = translation_utils.bert2id(self.en_vocab)
         
         for i in self.dataset: 
@@ -52,8 +52,8 @@ class Translation_dataset(Dataset):
           en_list_1.append(i['translation']['en'].lower())
 
         b = list(self.tokenizer(de_list_1, padding=True, return_tensors='pt')['input_ids'])
-        en_vocab, self.en_vocab_size = vocab(b)
-        de_vocab, self.de_vocab_size = vocab(a) 
+        # en_vocab, self.en_vocab_size = vocab(b)
+        self.de_vocab, self.de_vocab_size = vocab(a) 
             
   
   #should return the length of the dataset  

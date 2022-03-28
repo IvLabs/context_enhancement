@@ -1,0 +1,85 @@
+diff --git a/__pycache__/translation_dataset.cpython-37.pyc b/__pycache__/translation_dataset.cpython-37.pyc
+index e1406b6..26a4cec 100644
+Binary files a/__pycache__/translation_dataset.cpython-37.pyc and b/__pycache__/translation_dataset.cpython-37.pyc differ
+diff --git a/__pycache__/translation_utils.cpython-37.pyc b/__pycache__/translation_utils.cpython-37.pyc
+index ab11181..68b6c0e 100644
+Binary files a/__pycache__/translation_utils.cpython-37.pyc and b/__pycache__/translation_utils.cpython-37.pyc differ
+diff --git a/checkpoint/stats.txt b/checkpoint/stats.txt
+index 129113a..f2919ca 100644
+--- a/checkpoint/stats.txt
++++ b/checkpoint/stats.txt
+@@ -5,3 +5,4 @@ train_translation.py
+ {"epoch": 0, "step": 0, "time": 20}
+ train_translation.py
+ {"epoch": 0, "step": 0, "time": 19}
++train_translation.py
+diff --git a/train_translation.py b/train_translation.py
+index f6d3864..81f7173 100644
+--- a/train_translation.py
++++ b/train_translation.py
+@@ -45,7 +45,7 @@ parser.add_argument('--workers', default=4, type=int, metavar='N',
+                     help='number of data loader workers') 
+ parser.add_argument('--epochs', default=10, type=int, metavar='N',
+                     help='number of total epochs to run')
+-parser.add_argument('--batch-size', default=8, type=int, metavar='n',
++parser.add_argument('--batch-size', default=4, type=int, metavar='n',
+                     help='mini-batch size')
+ parser.add_argument('--learning-rate', default=0.2, type=float, metavar='LR',
+                     help='base learning rate')
+@@ -180,8 +180,8 @@ def main_worker(gpu, args):
+ 
+     sampler = torch.utils.data.distributed.DistributedSampler(dataset)
+ 
+-    assert args.batch-size % args.world_size == 0
+-    per_device_batch_size = args.batch-size // args.world_size
++    assert args.batch_size % args.world_size == 0
++    per_device_batch_size = args.batch_size // args.world_size
+     ###############################
+     loader = torch.utils.data.DataLoader(
+          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
+diff --git a/translation_utils.py b/translation_utils.py
+index df3161f..cf9312e 100644
+--- a/translation_utils.py
++++ b/translation_utils.py
+@@ -81,10 +81,10 @@ class TokenEmbedding(nn.Module):
+         super(TokenEmbedding, self).__init__()
+         # self.embedding = nn.Embedding(vocab_size, emb_size)
+         self.embedding = mbert
+-        # for param in self.embedding.parameters():
+-        #   param.requires_grad = False
+-        # for param in self.embedding.pooler.parameters():
+-        #   param.requires_grad = True
++        for param in self.embedding.parameters():
++            param.requires_grad = False
++        for param in self.embedding.pooler.parameters():
++            param.requires_grad = True
+         self.emb_size = emb_size
+ 
+     def forward(self, tokens: torch.tensor):
+diff --git a/wandb/debug-internal.log b/wandb/debug-internal.log
+index 4d44c7b..188d929 120000
+--- a/wandb/debug-internal.log
++++ b/wandb/debug-internal.log
+@@ -1 +1 @@
+-run-20220325_233805-jb82kk3e/logs/debug-internal.log
+\ No newline at end of file
++run-20220327_171935-1rof3sg8/logs/debug-internal.log
+\ No newline at end of file
+diff --git a/wandb/debug.log b/wandb/debug.log
+index fbe412a..d8bcc6f 120000
+--- a/wandb/debug.log
++++ b/wandb/debug.log
+@@ -1 +1 @@
+-run-20220325_233805-jb82kk3e/logs/debug.log
+\ No newline at end of file
++run-20220327_171935-1rof3sg8/logs/debug.log
+\ No newline at end of file
+diff --git a/wandb/latest-run b/wandb/latest-run
+index ba646b3..903aab4 120000
+--- a/wandb/latest-run
++++ b/wandb/latest-run
+@@ -1 +1 @@
+-run-20220325_233805-jb82kk3e
+\ No newline at end of file
++run-20220327_171935-1rof3sg8
+\ No newline at end of file

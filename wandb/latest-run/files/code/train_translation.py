@@ -125,9 +125,9 @@ def main_worker(gpu, args):
 
     if args.rank == 0:
 
-#        wandb.init(config=args, project='translation_test')#############################################
-#        wandb.config.update(args)
-#        config = wandb.config
+        wandb.init(config=args, project='translation_test')#############################################
+        wandb.config.update(args)
+        config = wandb.config
     
         # exit()
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -148,7 +148,6 @@ def main_worker(gpu, args):
 
 #    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
     # t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
-    # print(src_vocab_size, trg_vocab_size)
     model = Translator(src_vocab_size = src_vocab_size, tgt_vocab_size=trg_vocab_size).cuda(gpu)
 #    model_barlow = barlow.BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=model.transformer.encoder, lambd=args.lambd).cuda(gpu)
     '''
@@ -214,7 +213,7 @@ def main_worker(gpu, args):
             optimizer.step()
             # losses += loss.item()
             
-#            wandb.log({'iter_loss': loss})
+            wandb.log({'iter_loss': loss})
             epoch_loss += loss.item()
             torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
             
@@ -224,7 +223,7 @@ def main_worker(gpu, args):
                                  time=int(time.time() - start_time))
                     print(json.dumps(stats))
                     print(json.dumps(stats), file=stats_file)
-#        wandb.log({"epoch_loss":epoch_loss})
+        wandb.log({"epoch_loss":epoch_loss})
         
 ##############################################################
         if epoch%1 ==0 : 
@@ -235,11 +234,8 @@ def main_worker(gpu, args):
             
             for i in test_loader: 
                 src = i[0].cuda(gpu, non_blocking=True)
-                tgt_out = i[3].cuda(gpu, non_blocking=True)
-                num_tokens = src.shape[0]
-
-                src_mask = (torch.zeros(num_tokens, num_tokens)).type(torch.bool).cuda(gpu, non_blocking=True)
-                out = translate(model, src, tokenizer, src_mask, gpu)
+                tgt_out = i[1].cuda(gpu, non_blocking=True)
+                out = translate(model, src, tokenizer)
                 predicted.append(out)
                 target.append([tokenizer.convert_ids_to_tokens(tgt_out)])
                 
@@ -251,16 +247,13 @@ def main_worker(gpu, args):
             
             print(bleu_score(predicted, target))
 ##############################################################
-        if epoch%1 ==0 : 
-            torch.save(model.module.state_dict(),
-                   'path.pth')
-            print("Model is saved")
+
         if args.rank == 0:
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
                          optimizer=optimizer.state_dict())
             # torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
-#    wandb.finish()
+    wandb.finish()
            
 
 class Translator(nn.Module): 
@@ -324,19 +317,19 @@ todo:
 '''
 
 # function to generate output sequence using greedy algorithm 
-def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx, gpu):
+def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx):
     src = src
     src_mask = src_mask
 
-    memory = model.module.encode(src, src_mask)
-    ys = torch.ones(1, 1).fill_(start_symbol).type(torch.long).cuda(gpu, non_blocking=True)
+    memory = model.encode(src, src_mask)
+    ys = torch.ones(1, 1).fill_(start_symbol).type(torch.long)
     for i in range(max_len-1):
-        memory = memory
+        memory = memory.cuda(gpu, non_blocking=True)
         tgt_mask = (translation_utils.generate_square_subsequent_mask(ys.size(0))
-                    .type(torch.bool)).cuda(gpu, non_blocking=True)
-        out = model.module.decode(ys, memory, tgt_mask)
+                    .type(torch.bool))
+        out = model.decode(ys, memory, tgt_mask)
         out = out.transpose(0, 1)
-        prob = model.module.generator(out[:, -1])
+        prob = model.generator(out[:, -1])
         _, next_word = torch.max(prob, dim=1)
         next_word = next_word.item()
 
@@ -350,14 +343,12 @@ def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx, gpu):
 # actual function to translate input sentence into target language
 def translate(model: torch.nn.Module, 
         src: torch.tensor, 
-        tokenizer,src_mask, gpu):
+        tokenizer):
     model.eval()
-    
     num_tokens = src.shape[0]
-    
-    
+    src_mask = (torch.zeros(num_tokens, num_tokens)).type(torch.bool)
     tgt_tokens = greedy_decode(
-        model,  src, src_mask, max_len=num_tokens + 5, start_symbol=tokenizer.cls_token_id, eos_idx=tokenizer.sep_token_id, gpu=gpu).flatten()
+        model,  src, src_mask, max_len=num_tokens + 5, start_symbol=tokenizer.cls_token, eos_idx=tokenizer.sep_token).flatten()
     return tokenizer.convert_ids_to_tokens(tgt_tokens) 
 
 
