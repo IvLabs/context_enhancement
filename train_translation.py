@@ -251,15 +251,15 @@ def main_worker(gpu, args):
             
             print(bleu_score(predicted, target))
 ##############################################################
-        if epoch%1 ==0 : 
-            torch.save(model.module.state_dict(),
-                   'path.pth')
-            print("Model is saved")
+#         if epoch%1 ==0 : 
+#             torch.save(model.module.state_dict(),
+#                    'path.pth')
+#             print("Model is saved")
         if args.rank == 0:
             # save checkpoint
             state = dict(epoch=epoch + 1, model=model.state_dict(),
                          optimizer=optimizer.state_dict())
-            # torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
+            torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
 #    wandb.finish()
            
 
