@@ -14,18 +14,24 @@ import torch
 from torch import nn, optim 
 from torch.nn import Transformer 
 import torchtext
-import translation_dataset
-from translation_dataset import  Translation_dataset
-from translation_dataset import  MyCollate
+import t_dataset
+from t_dataset import  Translation_dataset_t
+from t_dataset import  MyCollate
 import translation_utils 
 from translation_utils import TokenEmbedding, PositionalEncoding 
 from translation_utils import create_mask
 from transformers import BertModel 
 from transformers import AutoTokenizer
 from torch import Tensor
-# from torchtext.metrics import bleu_score
+from torchtext.data.metrics import bleu_score
+from models import Translator
+from models import BarlowTwins
+
 import wandb 
 
+
+#import barlow
+os.environ['TRANSFORMERS_OFFLINE'] = 'yes'
 os.environ['WANDB_START_METHOD'] = 'thread'
 
 MANUAL_SEED = 4444
@@ -41,9 +47,9 @@ parser = argparse.ArgumentParser(description = 'Translation')
 # Training hyper-parameters: 
 parser.add_argument('--workers', default=4, type=int, metavar='N', 
                     help='number of data loader workers') 
-parser.add_argument('--epochs', default=2, type=int, metavar='N',
+parser.add_argument('--epochs', default=5, type=int, metavar='N',
                     help='number of total epochs to run')
-parser.add_argument('--batch-size', default=64, type=int, metavar='n',
+parser.add_argument('--batch_size', default=4, type=int, metavar='n',
                     help='mini-batch size')
 parser.add_argument('--learning-rate', default=0.2, type=float, metavar='LR',
                     help='base learning rate')
@@ -63,15 +69,17 @@ parser.add_argument('--loss_fn', default='cross_entropy', type=str, metavar='LF'
 # Transformer parameters: 
 parser.add_argument('--dmodel', default=768, type=int, metavar='T', 
                     help='dimension of transformer encoder')
-parser.add_argument('--nhead', default=3, type= int, metavar='N', 
+parser.add_argument('--nhead', default=4, type= int, metavar='N', 
                     help= 'number of heads in transformer') 
 parser.add_argument('--dfeedforward', default=256, type=int, metavar='F', 
                     help= 'dimension of feedforward layer in transformer encoder') 
 parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
+parser.add_argument('--projector', default='768-256', type=str,
+                    metavar='MLP', help='projector MLP')
 
 # Tokenizer: 
-parser.add_argument('--tokenizer', default='bert-base-multilingual-cased', type=str, 
+parser.add_argument('--tokenizer', default='bert-base-multilingual-uncased', type=str, 
                 metavar='T', help= 'tokenizer')
 parser.add_argument('--mbert-out-size', default=768, type=int, metavar='MO', 
                     help='Dimension of mbert output')
@@ -79,17 +87,31 @@ parser.add_argument('--mbert-out-size', default=768, type=int, metavar='MO',
 parser.add_argument('--checkpoint_dir', default='./checkpoint/', type=Path,
                     metavar='DIR', help='path to checkpoint directory')
 
+# to load or barlow or not: 
+parser.add_argument('--load', default=0, type=int,
+                    metavar='DIR', help='to load barlow twins encoder or not')
+
+# calculate bleu: 
+parser.add_argument('--checkbleu', default=5 , type=int,
+                    metavar='BL', help='check bleu after these number of epochs')
+# train or test dataset
+parser.add_argument('--train', default=True , type=bool,
+                    metavar='T', help='selecting train set')
+
+parser.add_argument('--print_freq', default=5 , type=int,
+                    metavar='PF', help='frequency of printing and saving stats')
+
 ''' NOTE: 
         Transformer and tokenizer arguments would remain constant in training and context enhancement step.  
 '''
 
 args = parser.parse_args()
-
+# print(args.load)
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 def main(): 
 
-    print("entered main")
+    # print("entered main")
     args.ngpus_per_node = torch.cuda.device_count()
     if 'SLURM_JOB_ID' in os.environ:
         # single-node and multi-node distributed training on SLURM cluster
@@ -116,12 +138,13 @@ def main_worker(gpu, args):
     
     args.rank += gpu
     torch.distributed.init_process_group(
-        backend='gloo', init_method=args.dist_url,
+        backend='nccl', init_method=args.dist_url,
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
+
 #        wandb.init(config=args, project='translation_test')#############################################
-        # wandb.config.update(args)
+#        wandb.config.update(args)
 #        config = wandb.config
     
         # exit()
@@ -133,7 +156,7 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
-    dataset = Translation_dataset() 
+    dataset = Translation_dataset_t(train=args.train) 
     src_vocab_size = dataset.de_vocab_size
     trg_vocab_size = dataset.en_vocab_size
     tokenizer = dataset.tokenizer  
@@ -143,7 +166,39 @@ def main_worker(gpu, args):
 
 #    transformer1 = nn.TransformerEncoderLayer(d_model = args.dmodel, nhead=args.nhead, dim_feedforward=args.dfeedforward, batch_first=True)
     # t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
-    model = Translator(src_vocab_size = src_vocab_size, tgt_vocab_size=trg_vocab_size).cuda(gpu)
+    # print(src_vocab_size, trg_vocab_size)
+    mbert = BertModel.from_pretrained('bert-base-multilingual-uncased')
+    transformer = Transformer(d_model=args.dmodel, 
+                              nhead=args.nhead, 
+                              num_encoder_layers=args.nlayers, 
+                              num_decoder_layers = args.nlayers, 
+                              dim_feedforward=args.dfeedforward, 
+                              dropout=args.dropout)
+    model = Translator(mbert=mbert, transformer= transformer, tgt_vocab_size=trg_vocab_size, emb_size=args.mbert_out_size).cuda(gpu)
+    # print(model.state_dict)
+#    model_barlow = barlow.BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=model.transformer.encoder, lambd=args.lambd).cuda(gpu)
+
+    # args.load = False
+
+    if args.load == 1: 
+        # print(args.load)
+        # print('inside')
+        print('loading barlow model')
+        t_enc = model.transformer.encoder
+        barlow = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, mbert=mbert, lambd=0.0051).cuda(gpu)
+        ### note: lambd is just a placeholder
+        ckpt = torch.load(args.checkpoint_dir/ 'barlow_checkpoint.pth', 
+                            map_location='cpu')
+        barlow.load_state_dict(ckpt['model'])
+        model.transformer.encoder = barlow.transformer_enc        
+        model.mbert = barlow.mbert
+    '''
+    to_do: 
+    if post_train: 
+        torch.load(model.states_dict)
+        model.transformer.encoder = model_barlow
+
+    '''
 #    model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
@@ -158,6 +213,7 @@ def main_worker(gpu, args):
 
 ###########################################################
     optimizer =torch.optim.Adam(model.parameters(), lr=args.learning_rate, betas=args.betas, eps=args.eps) 
+    
     if args.loss_fn == 'cross_entropy': 
         loss_fn = torch.nn.CrossEntropyLoss(ignore_index=pad_idx)
 ##############################################################
@@ -171,6 +227,10 @@ def main_worker(gpu, args):
     ###############################
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
+         pin_memory=True, sampler=sampler, collate_fn = MyCollate(tokenizer=tokenizer,bert2id_dict=dataset.bert2id_dict))
+   
+    test_loader = torch.utils.data.DataLoader(
+         dataset, batch_size=1, num_workers=args.workers,
          pin_memory=True, sampler=sampler, collate_fn = MyCollate(tokenizer=tokenizer,bert2id_dict=dataset.bert2id_dict))
     #############################
     start_time = time.time()
@@ -200,102 +260,103 @@ def main_worker(gpu, args):
             epoch_loss += loss.item()
             torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
             
-            if step % 50 == 0:
+            if step % args.print_freq == 0:
                 if args.rank == 0:
                     stats = dict(epoch=epoch, step=step,
+                                 loss=loss.item(),
                                  time=int(time.time() - start_time))
                     print(json.dumps(stats))
                     print(json.dumps(stats), file=stats_file)
-#        wandb.log({"epoch_loss":epoch_loss})
+        # wandb.log({"epoch_loss":epoch_loss})
         if args.rank == 0:
             # save checkpoint
-            state = dict(epoch=epoch + 1, model=model.state_dict(),
+            state = dict(epoch=epoch + 1, model=model.module.state_dict(),
                          optimizer=optimizer.state_dict())
-            torch.save(state, args.checkpoint_dir / f'checkpoint_{epoch}.pth')
+            # print(model.state_dict)
+            torch.save(state, args.checkpoint_dir / 'translation_checkpoint.pth')
+            print('translation model saved in', args.checkpoint_dir)
+        
+##############################################################
+        if epoch%args.checkbleu ==0 : 
+
+            model.eval()
+            predicted=[]
+            target=[]
+            
+            for i in test_loader: 
+                src = i[0].cuda(gpu, non_blocking=True)
+                tgt_out = i[3].cuda(gpu, non_blocking=True)
+                num_tokens = src.shape[0]
+
+                src_mask = (torch.zeros(num_tokens, num_tokens)).type(torch.bool).cuda(gpu, non_blocking=True)
+                out = translate(model, src, tokenizer, src_mask, gpu)
+                predicted.append(out)
+                target.append([tokenizer.convert_ids_to_tokens(tgt_out)])
+                
+                try: 
+                    bleu_score(predicted, target)
+                except: 
+                    predicted.pop()
+                    target.pop()
+            
+            print(bleu_score(predicted, target))
+##############################################################
+#        if epoch%1 ==0 : 
+#            torch.save(model.module.state_dict(),
+#                   'path.pth')
+#            print("Model is saved")
+        # if args.rank == 0:
+        #     # save checkpoint
+        #     state = dict(epoch=epoch + 1, model=model.state_dict(),
+        #                  optimizer=optimizer.state_dict())
+        #     torch.save(state, args.checkpoint_dir / f'translation_checkpoint.pth')
+        #     print('saved translation model in', args.checkpoint_dir)
 #    wandb.finish()
            
-
-class Translator(nn.Module): 
-        
-    def __init__(self,
-            src_vocab_size: int, 
-            tgt_vocab_size: int,
-            num_encoder_layers: int = args.nlayers, 
-            num_decoder_layers: int = args.nlayers, 
-            emb_size: int = args.mbert_out_size, 
-            nhead: int = args.nhead, 
-            dim_feedforward: int = args.dfeedforward, 
-            dropout: float = args.dropout):                 
-
-        super(Translator, self).__init__()
-    
-        self.transformer = Transformer(d_model=args.dmodel, 
-                                   nhead=nhead, 
-                                   num_encoder_layers=num_encoder_layers,
-                                   num_decoder_layers=num_decoder_layers, 
-                                   dim_feedforward=dim_feedforward, 
-                                   dropout=dropout)
-        self.generator = nn.Linear(emb_size, tgt_vocab_size) 
-        self.tok_emb = TokenEmbedding(emb_size = emb_size)
-        # self.trg_tok_emb = TokenEmbedding(tgt_vocab_size, emb_size)
-        # self.positional_encoding = PositionalEncoding(emb_size, dropout=args.dropout)
-
-
-    def forward(self, 
-            src: Tensor, 
-            tgt: Tensor, 
-            src_mask: Tensor,
-            tgt_mask: Tensor,  
-            src_padding_mask: Tensor,
-            tgt_padding_mask: Tensor, 
-            memory_key_padding_mask: Tensor): 
-
-        # print(src.shape, tgt.shape)
-        src_emb = self.tok_emb(src)
-        trg_emb = self.tok_emb(tgt)
-        out = self.transformer(src_emb, trg_emb, src_mask, tgt_mask, None, 
-                src_padding_mask, tgt_padding_mask, memory_key_padding_mask) 
-        
-        return self.generator(out) 
-
-    def encode(self, 
-            src: Tensor, 
-            src_mask: Tensor): 
-        return self.transformer.encoder(self.tok_emb(src),  src_mask) 
-
-    def decode(self, tgt: Tensor, 
-            memory: Tensor, 
-            tgt_mask: Tensor): 
-        return self.transformer.decoder(self.tok_emb(tgt), memory, tgt_mask)
 
 
 '''
 todo: 
     BLEU score
 '''
-#def greedy_decode(model, 
-#        src: Tensor, 
-#        src_mask: Tensor, 
-#        max_len: int, 
-#        start_symbol: str): 
-#
-#    src = src.cuda(gpu, non_blocking=True) 
-#    src_mask = src_mask.cuda(gpu, non_blocking=True)
-#
-#    memory = model.encode(src, src_mask) 
-#    ys = torch.ones(1,1).fill_(start_symbol).type(torch.long).cuda(gpu, non_blocking=True) 
-#
-#    for i in range(max_len-1): 
-#        memory = memory.cuda(gpu, non_blocking=True) 
-#        tgt_mask = translation_utils.generate_square_subsequent_mask(ys.size(0)).type(torch.bool)).cuda(gpu, non_blocking=True) 
-#        out = out.transpose(0,1)
-#        prob = model.generator(out[:, -1])
-#        _, next_word = torch.max(prob, dim=1) 
-#        next_word = next_word.item()
-#
-#        ys = torch.cat([ys, 
-#            torch.ones(1,1).type_as(src.data).fill_(next_word)], dim=0)
-#        ext_word == tokenizer.convert_ids_to_tokens(eos_idx)  
+
+# function to generate output sequence using greedy algorithm 
+def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx, gpu):
+    src = src
+    src_mask = src_mask
+
+    memory = model.module.encode(src, src_mask)
+    ys = torch.ones(1, 1).fill_(start_symbol).type(torch.long).cuda(gpu, non_blocking=True)
+    for i in range(max_len-1):
+        memory = memory
+        tgt_mask = (translation_utils.generate_square_subsequent_mask(ys.size(0))
+                    .type(torch.bool)).cuda(gpu, non_blocking=True)
+        out = model.module.decode(ys, memory, tgt_mask)
+        out = out.transpose(0, 1)
+        prob = model.module.generator(out[:, -1])
+        _, next_word = torch.max(prob, dim=1)
+        next_word = next_word.item()
+
+        ys = torch.cat([ys,
+                        torch.ones(1, 1).type_as(src.data).fill_(next_word)], dim=0)
+        if next_word == eos_idx:
+            break
+    return ys
+
+
+# actual function to translate input sentence into target language
+def translate(model: torch.nn.Module, 
+        src: torch.tensor, 
+        tokenizer,src_mask, gpu):
+    model.eval()
+    
+    num_tokens = src.shape[0]
+    
+    
+    tgt_tokens = greedy_decode(
+        model,  src, src_mask, max_len=num_tokens + 5, start_symbol=tokenizer.cls_token_id, eos_idx=tokenizer.sep_token_id, gpu=gpu).flatten()
+    return tokenizer.convert_ids_to_tokens(tgt_tokens) 
+
 
 if __name__ == '__main__': 
     main()

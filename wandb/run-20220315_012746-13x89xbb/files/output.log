@@ -1,5 +1,0 @@
-
-train_translation.py
-Reusing dataset opus_rf (C:\Users\Welcome\.cache\huggingface\datasets\opus_rf\de-en\1.0.0\3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
-{"epoch": 0, "step": 0, "time": 389}
-D:\context_enhancement\context-main\combined\context_enhancement\train_translation.py:198: UserWarning: torch.nn.utils.clip_grad_norm is now deprecated in favor of torch.nn.utils.clip_grad_norm_.

@@ -1,4 +1,0 @@
-
-train_translation.py
-Reusing dataset opus_rf (C:\Users\Welcome\.cache\huggingface\datasets\opus_rf\de-en\1.0.0\3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
-torch.Size([79, 64]) torch.Size([72, 64])

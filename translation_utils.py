@@ -2,9 +2,10 @@ import torch
 import torch.nn as nn 
 import  math 
 import transformers 
-from transformers import XLMRobertaModel 
+from transformers import BertModel 
 
-mbert = XLMRobertaModel.from_pretrained('xlm-roberta-base')
+
+#model = BertModel.from_pretrained("bert-base-uncased")
 
 def vocab(en_list: torch.tensor): 
     # a = list(tokenizer(en_list, padding=True, return_tensors='pt')[
@@ -40,6 +41,10 @@ def create_mask(src, tgt, pad_idx):
 
     PAD_IDX = pad_idx
 
+    # print(src.shape, tgt.shape)
+    if len(src.shape) == 1: 
+        src = src.unsqueeze(-1)
+        tgt = tgt.unsqueeze(-1)
     src_seq_len = src.shape[0]
     tgt_seq_len = tgt.shape[0]
 
@@ -72,16 +77,18 @@ class PositionalEncoding(nn.Module):
 
 # helper Module to convert tensor of input indices into corresponding tensor of token embeddings
 class TokenEmbedding(nn.Module):
-    def __init__(self, emb_size):
+    def __init__(self, emb_size, mbert):
         super(TokenEmbedding, self).__init__()
         # self.embedding = nn.Embedding(vocab_size, emb_size)
         self.embedding = mbert
-        # for param in self.embedding.parameters():
-        #   param.requires_grad = False
-        # for param in self.embedding.pooler.parameters():
-        #   param.requires_grad = True
+        for param in self.embedding.parameters():
+            param.requires_grad = False
+        for param in self.embedding.pooler.parameters():
+            param.requires_grad = True
         self.emb_size = emb_size
 
     def forward(self, tokens: torch.tensor):
         # print(tokens.shape)
+        if len(tokens.shape) ==1: 
+            tokens  = tokens.unsqueeze(-1)
         return self.embedding(tokens.long().T)['last_hidden_state'].permute(1, 0, 2) * math.sqrt(self.emb_size)

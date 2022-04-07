@@ -1,0 +1,469 @@
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+main.py
+{"epoch": 0, "step": 0, "lr_weights": 0.0, "lr_biases": 0.0, "loss": 4355597.5, "time": 106}
+main.py
+main.py
+{"epoch": 0, "step": 0, "lr_weights": 0.0, "lr_biases": 0.0, "loss": 4599995.5, "time": 107}
+{"epoch": 0, "step": 100, "lr_weights": 0.00016622340425531917, "lr_biases": 3.989361702127659e-06, "loss": 3539234.75, "time": 213}
+barlow.py --load 0
+barlow.py --load 0
+barlow.py --load 0
+barlow.py
+barlow.py --load 0
+{"epoch": 0, "step": 0, "lr_weights": 0.0, "lr_biases": 0.0, "loss": 580.4853515625, "time": 16}
+train_translation.py --load 0
+train_translation.py --load 0
+train_translation.py --load 0
+train_translation.py --load 0
+train_translation.py --load 0
+train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.122797966003418, "time": 5}
+{"epoch": 0, "step": 5, "loss": 198.62460327148438, "time": 6}
+{"epoch": 0, "step": 10, "loss": 119.2225341796875, "time": 7}
+{"epoch": 0, "step": 15, "loss": 89.00521850585938, "time": 8}
+{"epoch": 0, "step": 20, "loss": 144.1955108642578, "time": 9}
+{"epoch": 0, "step": 25, "loss": 126.2806396484375, "time": 10}
+{"epoch": 0, "step": 30, "loss": 115.61041259765625, "time": 11}
+{"epoch": 0, "step": 35, "loss": 84.10115814208984, "time": 12}
+{"epoch": 0, "step": 40, "loss": 65.00213623046875, "time": 13}
+{"epoch": 1, "step": 45, "loss": 79.53411865234375, "time": 95}
+{"epoch": 1, "step": 50, "loss": 81.8320541381836, "time": 96}
+{"epoch": 1, "step": 55, "loss": 97.07718658447266, "time": 97}
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.122797966003418, "time": 5}
+{"epoch": 0, "step": 5, "loss": 198.62460327148438, "time": 6}
+{"epoch": 0, "step": 10, "loss": 119.2225341796875, "time": 7}
+{"epoch": 0, "step": 15, "loss": 89.00521850585938, "time": 8}
+{"epoch": 0, "step": 20, "loss": 144.1955108642578, "time": 9}
+{"epoch": 0, "step": 25, "loss": 126.2806396484375, "time": 10}
+{"epoch": 0, "step": 30, "loss": 115.61041259765625, "time": 11}
+{"epoch": 0, "step": 35, "loss": 84.10115814208984, "time": 12}
+{"epoch": 0, "step": 40, "loss": 65.00213623046875, "time": 13}
+{"epoch": 1, "step": 45, "loss": 79.53411865234375, "time": 99}
+{"epoch": 1, "step": 50, "loss": 81.8320541381836, "time": 100}
+{"epoch": 1, "step": 55, "loss": 97.07718658447266, "time": 101}
+{"epoch": 1, "step": 60, "loss": 77.87088012695312, "time": 102}
+{"epoch": 1, "step": 65, "loss": 91.45843505859375, "time": 103}
+{"epoch": 1, "step": 70, "loss": 81.77067565917969, "time": 104}
+{"epoch": 1, "step": 75, "loss": 93.20482635498047, "time": 105}
+{"epoch": 1, "step": 80, "loss": 96.80836486816406, "time": 106}
+{"epoch": 1, "step": 85, "loss": 99.4000473022461, "time": 107}
+{"epoch": 2, "step": 90, "loss": 84.4419174194336, "time": 126}
+{"epoch": 2, "step": 95, "loss": 89.35089111328125, "time": 127}
+{"epoch": 2, "step": 100, "loss": 70.36296081542969, "time": 128}
+{"epoch": 2, "step": 105, "loss": 93.40479278564453, "time": 129}
+{"epoch": 2, "step": 110, "loss": 85.92987823486328, "time": 130}
+{"epoch": 2, "step": 115, "loss": 84.89830780029297, "time": 131}
+{"epoch": 2, "step": 120, "loss": 88.87590789794922, "time": 132}
+{"epoch": 2, "step": 125, "loss": 89.31674194335938, "time": 133}
+{"epoch": 2, "step": 130, "loss": 114.93965911865234, "time": 133}
+{"epoch": 3, "step": 135, "loss": 76.80366516113281, "time": 154}
+{"epoch": 3, "step": 140, "loss": 140.8549346923828, "time": 155}
+{"epoch": 3, "step": 145, "loss": 113.339111328125, "time": 156}
+{"epoch": 3, "step": 150, "loss": 93.06966400146484, "time": 157}
+{"epoch": 3, "step": 155, "loss": 113.3215103149414, "time": 158}
+{"epoch": 3, "step": 160, "loss": 109.3653335571289, "time": 159}
+{"epoch": 3, "step": 165, "loss": 139.5435333251953, "time": 160}
+{"epoch": 3, "step": 170, "loss": 76.41168975830078, "time": 161}
+{"epoch": 3, "step": 175, "loss": 132.55953979492188, "time": 162}
+{"epoch": 4, "step": 180, "loss": 109.78890228271484, "time": 181}
+{"epoch": 4, "step": 185, "loss": 88.3539810180664, "time": 182}
+{"epoch": 4, "step": 190, "loss": 113.5445327758789, "time": 183}
+{"epoch": 4, "step": 195, "loss": 107.1954345703125, "time": 184}
+{"epoch": 4, "step": 200, "loss": 127.9149398803711, "time": 185}
+{"epoch": 4, "step": 205, "loss": 131.3365936279297, "time": 186}
+{"epoch": 4, "step": 210, "loss": 129.23558044433594, "time": 187}
+{"epoch": 4, "step": 215, "loss": 86.24095153808594, "time": 188}
+{"epoch": 4, "step": 220, "loss": 143.04344177246094, "time": 189}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.122797966003418, "time": 5}
+{"epoch": 0, "step": 5, "loss": 198.62460327148438, "time": 6}
+{"epoch": 0, "step": 10, "loss": 119.2225341796875, "time": 7}
+{"epoch": 0, "step": 15, "loss": 89.00521850585938, "time": 8}
+{"epoch": 0, "step": 20, "loss": 144.1955108642578, "time": 9}
+{"epoch": 0, "step": 25, "loss": 126.2806396484375, "time": 10}
+{"epoch": 0, "step": 30, "loss": 115.61041259765625, "time": 11}
+{"epoch": 0, "step": 35, "loss": 84.10115814208984, "time": 12}
+{"epoch": 0, "step": 40, "loss": 65.00213623046875, "time": 13}
+{"epoch": 1, "step": 45, "loss": 79.53411865234375, "time": 98}
+{"epoch": 1, "step": 50, "loss": 81.8320541381836, "time": 99}
+{"epoch": 1, "step": 55, "loss": 97.07718658447266, "time": 100}
+{"epoch": 1, "step": 60, "loss": 77.87088012695312, "time": 101}
+{"epoch": 1, "step": 65, "loss": 91.45843505859375, "time": 102}
+{"epoch": 1, "step": 70, "loss": 81.77067565917969, "time": 103}
+{"epoch": 1, "step": 75, "loss": 93.20482635498047, "time": 104}
+{"epoch": 1, "step": 80, "loss": 96.80836486816406, "time": 105}
+{"epoch": 1, "step": 85, "loss": 99.4000473022461, "time": 106}
+{"epoch": 2, "step": 90, "loss": 84.4419174194336, "time": 125}
+{"epoch": 2, "step": 95, "loss": 89.35089111328125, "time": 126}
+{"epoch": 2, "step": 100, "loss": 70.36296081542969, "time": 127}
+{"epoch": 2, "step": 105, "loss": 93.40479278564453, "time": 128}
+{"epoch": 2, "step": 110, "loss": 85.92987823486328, "time": 129}
+{"epoch": 2, "step": 115, "loss": 84.89830780029297, "time": 130}
+{"epoch": 2, "step": 120, "loss": 88.87590789794922, "time": 131}
+{"epoch": 2, "step": 125, "loss": 89.31674194335938, "time": 132}
+{"epoch": 2, "step": 130, "loss": 114.93965911865234, "time": 133}
+{"epoch": 3, "step": 135, "loss": 76.80366516113281, "time": 154}
+{"epoch": 3, "step": 140, "loss": 140.8549346923828, "time": 155}
+{"epoch": 3, "step": 145, "loss": 113.339111328125, "time": 156}
+{"epoch": 3, "step": 150, "loss": 93.06966400146484, "time": 157}
+{"epoch": 3, "step": 155, "loss": 113.3215103149414, "time": 157}
+{"epoch": 3, "step": 160, "loss": 109.3653335571289, "time": 159}
+{"epoch": 3, "step": 165, "loss": 139.5435333251953, "time": 160}
+{"epoch": 3, "step": 170, "loss": 76.41168975830078, "time": 161}
+{"epoch": 3, "step": 175, "loss": 132.55953979492188, "time": 162}
+{"epoch": 4, "step": 180, "loss": 109.78890228271484, "time": 182}
+{"epoch": 4, "step": 185, "loss": 88.3539810180664, "time": 183}
+{"epoch": 4, "step": 190, "loss": 113.5445327758789, "time": 184}
+{"epoch": 4, "step": 195, "loss": 107.1954345703125, "time": 185}
+{"epoch": 4, "step": 200, "loss": 127.9149398803711, "time": 186}
+{"epoch": 4, "step": 205, "loss": 131.3365936279297, "time": 187}
+{"epoch": 4, "step": 210, "loss": 129.23558044433594, "time": 188}
+{"epoch": 4, "step": 215, "loss": 86.24095153808594, "time": 189}
+{"epoch": 4, "step": 220, "loss": 143.04344177246094, "time": 190}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+train_translation.py
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 6}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 8}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 9}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 10}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 71}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 71}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 72}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 72}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 73}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 74}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 74}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 75}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 76}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 94}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 95}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 95}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 96}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 96}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 97}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 98}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 98}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 99}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 117}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 118}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 118}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 119}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 120}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 120}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 121}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 121}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 122}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 140}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 140}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 141}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 142}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 142}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 143}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 143}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 144}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 145}
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 6}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 8}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 9}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 10}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 60}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 61}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 61}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 62}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 62}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 63}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 64}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 64}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 65}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 82}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 83}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 83}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 84}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 84}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 85}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 85}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 86}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 86}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 109}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 110}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 110}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 111}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 111}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 112}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 112}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 113}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 113}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 132}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 132}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 133}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 133}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 134}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 134}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 135}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 136}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 136}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 6}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 10}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 62}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 63}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 63}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 64}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 64}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 65}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 65}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 66}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 67}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 87}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 87}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 88}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 88}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 89}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 89}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 90}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 91}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 91}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 119}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 119}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 120}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 120}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 121}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 122}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 122}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 123}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 123}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 143}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 143}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 144}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 144}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 145}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 145}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 146}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 146}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 147}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 5}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 9}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 62}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 62}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 63}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 64}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 64}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 65}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 65}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 66}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 66}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 84}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 84}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 85}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 85}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 86}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 86}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 87}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 87}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 88}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 106}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 106}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 107}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 108}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 108}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 109}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 109}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 110}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 110}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 130}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 130}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 131}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 131}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 132}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 132}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 133}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 133}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 134}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 5}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 9}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 60}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 61}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 61}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 62}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 62}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 63}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 63}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 64}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 64}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 83}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 83}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 84}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 84}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 85}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 86}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 86}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 87}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 87}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 105}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 106}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 106}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 107}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 108}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 108}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 109}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 109}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 110}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 129}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 130}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 130}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 131}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 131}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 132}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 132}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 133}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 133}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 5}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 9}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 62}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 63}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 63}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 64}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 64}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 65}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 66}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 66}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 67}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 87}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 87}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 88}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 88}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 89}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 90}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 90}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 91}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 91}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 110}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 110}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 111}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 111}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 112}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 112}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 113}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 114}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 114}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 136}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 137}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 137}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 138}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 138}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 139}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 139}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 140}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 141}
+/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
+/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
+{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
+{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 5}
+{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
+{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
+{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
+{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
+{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
+{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
+{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 9}
+{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 61}
+{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 62}
+{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 63}
+{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 63}
+{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 64}
+{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 64}
+{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 65}
+{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 65}
+{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 66}
+{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 83}
+{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 84}
+{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 84}
+{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 85}
+{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 85}
+{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 86}
+{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 86}
+{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 87}
+{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 87}
+{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 107}
+{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 107}
+{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 108}
+{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 108}
+{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 109}
+{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 110}
+{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 110}
+{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 111}
+{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 111}
+{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 129}
+{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 129}
+{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 130}
+{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 131}
+{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 131}
+{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 132}
+{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 132}
+{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 133}
+{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 133}

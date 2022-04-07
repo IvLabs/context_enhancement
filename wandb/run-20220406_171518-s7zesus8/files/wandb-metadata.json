@@ -1,0 +1,21 @@
+{
+    "os": "Linux-5.13.0-39-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.7.11",
+    "heartbeatAt": "2022-04-06T11:45:20.215162",
+    "startedAt": "2022-04-06T11:45:18.613420",
+    "docker": null,
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "gpu_count": 2,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "--load",
+        "0"
+    ],
+    "state": "running",
+    "program": "/home/ivlabs/context_enhancement/context_enhancement/barlow.py",
+    "codePath": "barlow.py",
+    "host": "hubble-02",
+    "username": "ivlabs",
+    "executable": "/home/ivlabs/miniconda3/envs/ectc/bin/python"
+}
