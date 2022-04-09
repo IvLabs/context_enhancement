@@ -1,0 +1,14 @@
+wandb_version: 1
+
+batch_size:
+  value: 256
+dfeedforward:
+  value: 256
+epochs:
+  value: 36
+lambd:
+  value: 0.4
+nhead:
+  value: 4
+nlayers:
+  value: 6

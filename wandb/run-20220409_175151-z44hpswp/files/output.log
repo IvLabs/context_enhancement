@@ -1,0 +1,48 @@
+
+train_translation.py --batch_size=128 --dfeedforward=1024 --epochs=24 --nhead=4 --nlayers=4
+[34m[1mwandb[39m[22m: [33mWARNING[39m Config item 'epochs' was locked by 'sweep' (ignored update).
+[34m[1mwandb[39m[22m: [33mWARNING[39m Config item 'batch_size' was locked by 'sweep' (ignored update).
+[34m[1mwandb[39m[22m: [33mWARNING[39m Config item 'nhead' was locked by 'sweep' (ignored update).
+[34m[1mwandb[39m[22m: [33mWARNING[39m Config item 'dfeedforward' was locked by 'sweep' (ignored update).
+[34m[1mwandb[39m[22m: [33mWARNING[39m Config item 'nlayers' was locked by 'sweep' (ignored update).
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Some weights of the model checkpoint at bert-base-multilingual-uncased were not used when initializing BertModel: ['cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+{"epoch": 0, "step": 0, "loss": 7.140841484069824, "time": 5}
+/home/ivlabs/context_enhancement/context_new/context_enhancement/train_translation.py:264: UserWarning: torch.nn.utils.clip_grad_norm is now deprecated in favor of torch.nn.utils.clip_grad_norm_.
+  torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 2, "step": 5, "loss": 253.87469482421875, "time": 74}
+translation model saved in checkpoint
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 5, "step": 10, "loss": 150.13229370117188, "time": 139}
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 7, "step": 15, "loss": 106.13131713867188, "time": 216}
+translation model saved in checkpoint
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 10, "step": 20, "loss": 77.7083511352539, "time": 285}
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 12, "step": 25, "loss": 74.31400299072266, "time": 365}
+translation model saved in checkpoint
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 15, "step": 30, "loss": 74.50468444824219, "time": 432}
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 17, "step": 35, "loss": 62.94711685180664, "time": 515}
+translation model saved in checkpoint
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 20, "step": 40, "loss": 59.828826904296875, "time": 583}
+translation model saved in checkpoint
+translation model saved in checkpoint
+{"epoch": 22, "step": 45, "loss": 62.49226379394531, "time": 663}
+translation model saved in checkpoint
+translation model saved in checkpoint

@@ -1,0 +1,234 @@
+diff --git a/__pycache__/barlow.cpython-37.pyc b/__pycache__/barlow.cpython-37.pyc
+index d9b3757..420c21a 100644
+Binary files a/__pycache__/barlow.cpython-37.pyc and b/__pycache__/barlow.cpython-37.pyc differ
+diff --git a/checkpoint/stats.txt b/checkpoint/stats.txt
+index 97f9eb6..2248477 100644
+--- a/checkpoint/stats.txt
++++ b/checkpoint/stats.txt
+@@ -467,3 +467,95 @@ train_translation.py
+ {"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 132}
+ {"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 133}
+ {"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 133}
++/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
++{"epoch": 0, "step": 0, "loss": 7.142178058624268, "time": 5}
++{"epoch": 0, "step": 5, "loss": 69.92982482910156, "time": 5}
++{"epoch": 0, "step": 10, "loss": 187.95425415039062, "time": 6}
++{"epoch": 0, "step": 15, "loss": 116.46453094482422, "time": 7}
++{"epoch": 0, "step": 20, "loss": 103.49996948242188, "time": 7}
++{"epoch": 0, "step": 25, "loss": 109.99765014648438, "time": 8}
++{"epoch": 0, "step": 30, "loss": 82.7474365234375, "time": 8}
++{"epoch": 0, "step": 35, "loss": 81.3102798461914, "time": 9}
++{"epoch": 0, "step": 40, "loss": 68.49085235595703, "time": 9}
++{"epoch": 1, "step": 45, "loss": 83.40009307861328, "time": 60}
++{"epoch": 1, "step": 50, "loss": 83.65938568115234, "time": 61}
++{"epoch": 1, "step": 55, "loss": 121.91883850097656, "time": 61}
++{"epoch": 1, "step": 60, "loss": 69.18376159667969, "time": 62}
++{"epoch": 1, "step": 65, "loss": 108.74915313720703, "time": 63}
++{"epoch": 1, "step": 70, "loss": 72.30828094482422, "time": 63}
++{"epoch": 1, "step": 75, "loss": 71.81124114990234, "time": 64}
++{"epoch": 1, "step": 80, "loss": 68.34536743164062, "time": 64}
++{"epoch": 1, "step": 85, "loss": 60.85449981689453, "time": 65}
++{"epoch": 2, "step": 90, "loss": 77.74386596679688, "time": 85}
++{"epoch": 2, "step": 95, "loss": 96.72307586669922, "time": 85}
++{"epoch": 2, "step": 100, "loss": 101.80294036865234, "time": 86}
++{"epoch": 2, "step": 105, "loss": 84.51009368896484, "time": 86}
++{"epoch": 2, "step": 110, "loss": 72.72525787353516, "time": 87}
++{"epoch": 2, "step": 115, "loss": 74.45042419433594, "time": 88}
++{"epoch": 2, "step": 120, "loss": 67.41654968261719, "time": 88}
++{"epoch": 2, "step": 125, "loss": 78.1681137084961, "time": 89}
++{"epoch": 2, "step": 130, "loss": 92.35138702392578, "time": 89}
++{"epoch": 3, "step": 135, "loss": 67.62174224853516, "time": 106}
++{"epoch": 3, "step": 140, "loss": 73.0427017211914, "time": 106}
++{"epoch": 3, "step": 145, "loss": 105.50846099853516, "time": 107}
++{"epoch": 3, "step": 150, "loss": 80.58209991455078, "time": 108}
++{"epoch": 3, "step": 155, "loss": 93.44019317626953, "time": 108}
++{"epoch": 3, "step": 160, "loss": 89.55480194091797, "time": 109}
++{"epoch": 3, "step": 165, "loss": 105.64498138427734, "time": 109}
++{"epoch": 3, "step": 170, "loss": 114.21644592285156, "time": 110}
++{"epoch": 3, "step": 175, "loss": 132.64865112304688, "time": 110}
++{"epoch": 4, "step": 180, "loss": 123.47101593017578, "time": 129}
++{"epoch": 4, "step": 185, "loss": 98.48711395263672, "time": 130}
++{"epoch": 4, "step": 190, "loss": 106.57389831542969, "time": 130}
++{"epoch": 4, "step": 195, "loss": 123.41980743408203, "time": 131}
++{"epoch": 4, "step": 200, "loss": 133.0455322265625, "time": 131}
++{"epoch": 4, "step": 205, "loss": 115.12477111816406, "time": 132}
++{"epoch": 4, "step": 210, "loss": 173.08377075195312, "time": 132}
++{"epoch": 4, "step": 215, "loss": 95.62724304199219, "time": 133}
++{"epoch": 4, "step": 220, "loss": 146.6149444580078, "time": 134}
++/home/ivlabs/context_enhancement/context_enhancement/barlow.py --load 1
++/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 1
++/home/ivlabs/context_enhancement/context_enhancement/train_translation.py --load 0
++train_translation.py --batch_size=32 --dfeedforward=1024 --epochs=28 --nhead=8 --nlayers=6
++{"epoch": 0, "step": 0, "loss": 7.120170593261719, "time": 5}
++{"epoch": 0, "step": 5, "loss": 151.9119415283203, "time": 8}
++{"epoch": 1, "step": 10, "loss": 112.8124008178711, "time": 84}
++{"epoch": 2, "step": 15, "loss": 47.12509536743164, "time": 111}
++{"epoch": 3, "step": 20, "loss": 45.04984664916992, "time": 139}
++{"epoch": 4, "step": 25, "loss": 38.9657096862793, "time": 165}
++{"epoch": 5, "step": 30, "loss": 60.226715087890625, "time": 190}
++{"epoch": 5, "step": 35, "loss": 65.24925231933594, "time": 192}
++{"epoch": 6, "step": 40, "loss": 65.57554626464844, "time": 268}
++{"epoch": 7, "step": 45, "loss": 61.62765121459961, "time": 294}
++{"epoch": 8, "step": 50, "loss": 64.9477310180664, "time": 319}
++{"epoch": 9, "step": 55, "loss": 72.8912353515625, "time": 344}
++{"epoch": 10, "step": 60, "loss": 86.97362518310547, "time": 369}
++{"epoch": 10, "step": 65, "loss": 112.7873306274414, "time": 372}
++{"epoch": 11, "step": 70, "loss": 88.19213104248047, "time": 447}
++{"epoch": 12, "step": 75, "loss": 73.24372863769531, "time": 472}
++{"epoch": 13, "step": 80, "loss": 73.8764419555664, "time": 498}
++{"epoch": 14, "step": 85, "loss": 87.44139099121094, "time": 525}
++{"epoch": 15, "step": 90, "loss": 66.60698699951172, "time": 551}
++{"epoch": 15, "step": 95, "loss": 80.11738586425781, "time": 553}
++{"epoch": 16, "step": 100, "loss": 88.93124389648438, "time": 624}
++{"epoch": 17, "step": 105, "loss": 74.59225463867188, "time": 649}
++{"epoch": 18, "step": 110, "loss": 108.9293441772461, "time": 675}
++{"epoch": 19, "step": 115, "loss": 87.63671112060547, "time": 700}
++{"epoch": 20, "step": 120, "loss": 99.23358154296875, "time": 725}
++{"epoch": 20, "step": 125, "loss": 118.16622924804688, "time": 727}
++{"epoch": 21, "step": 130, "loss": 102.9515380859375, "time": 801}
++{"epoch": 22, "step": 135, "loss": 80.40345764160156, "time": 827}
++{"epoch": 23, "step": 140, "loss": 87.99221801757812, "time": 852}
++{"epoch": 24, "step": 145, "loss": 63.2794303894043, "time": 876}
++{"epoch": 25, "step": 150, "loss": 78.17864227294922, "time": 902}
++{"epoch": 25, "step": 155, "loss": 100.8608169555664, "time": 904}
++{"epoch": 26, "step": 160, "loss": 88.68865203857422, "time": 976}
++{"epoch": 27, "step": 165, "loss": 84.6174087524414, "time": 1002}
++train_translation.py --batch_size=256 --dfeedforward=512 --epochs=32 --nhead=6 --nlayers=4
++{"epoch": 0, "step": 0, "loss": 7.139744758605957, "time": 6}
++train_translation.py --batch_size=128 --dfeedforward=1024 --epochs=36 --nhead=4 --nlayers=4
++{"epoch": 0, "step": 0, "loss": 7.140841484069824, "time": 6}
++train_translation.py --batch_size=16 --dfeedforward=1024 --epochs=32 --nhead=6 --nlayers=2
++{"epoch": 0, "step": 0, "loss": 7.180241584777832, "time": 5}
++train_translation.py --batch_size=128 --dfeedforward=1024 --epochs=20 --nhead=8 --nlayers=6
++{"epoch": 0, "step": 0, "loss": 7.120020389556885, "time": 6}
+diff --git a/sweep.yaml b/sweep.yaml
+index 6402430..ae76056 100644
+--- a/sweep.yaml
++++ b/sweep.yaml
+@@ -1,17 +1,20 @@
+-program: main.py
++program: train_translation.py
+ method: bayes
+ metric: 
+     name: epoch_loss
+     goal: minimize
+ 
+-description: 'trial2 learning q distributions' 
++description: 'translation sweep' 
+ parameters: 
+ 
+-    lambd: 
++    epochs:
+         distribution: 'q_uniform'
+-        min: 0
+-        max: 1
+-        q: 0.05
++        min: 10
++        max: 40
++        q: 4
++
++    batch_size: 
++        values: [16, 32, 64, 128, 256]
+     
+     nhead:
+         distribution: 'q_uniform'
+@@ -19,6 +22,9 @@ parameters:
+         max: 8
+         q: 2
+ 
++    dfeedforward:
++        values: [ 256, 512, 1024]
++
+     nlayers:
+         distribution: 'q_uniform'
+         min: 2
+@@ -26,6 +32,6 @@ parameters:
+         q: 2
+ 
+     
+-
++ # to add: lr, dropout, betas, loss_fn  
+ 
+ 
+diff --git a/train_translation.py b/train_translation.py
+index 1b0fe42..e482ba7 100644
+--- a/train_translation.py
++++ b/train_translation.py
+@@ -143,9 +143,9 @@ def main_worker(gpu, args):
+ 
+     if args.rank == 0:
+ 
+-#        wandb.init(config=args, project='translation_test')#############################################
+-#        wandb.config.update(args)
+-#        config = wandb.config
++        wandb.init(config=args, project='translation_test')#############################################
++        wandb.config.update(args)
++        config = wandb.config
+     
+         # exit()
+         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
+@@ -256,7 +256,7 @@ def main_worker(gpu, args):
+             optimizer.step()
+             # losses += loss.item()
+             
+-#            wandb.log({'iter_loss': loss})
++            wandb.log({'iter_loss': loss})
+             epoch_loss += loss.item()
+             torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
+             
+@@ -267,7 +267,7 @@ def main_worker(gpu, args):
+                                  time=int(time.time() - start_time))
+                     print(json.dumps(stats))
+                     print(json.dumps(stats), file=stats_file)
+-        # wandb.log({"epoch_loss":epoch_loss})
++        wandb.log({"epoch_loss":epoch_loss})
+         if args.rank == 0:
+             # save checkpoint
+             state = dict(epoch=epoch + 1, model=model.module.state_dict(),
+@@ -299,7 +299,9 @@ def main_worker(gpu, args):
+                     predicted.pop()
+                     target.pop()
+             
+-            print(bleu_score(predicted, target))
++            bleu_score = bleu_score(predicted, target)
++            wandb.log({'bleu_score': bleu_score}) 
++#            print(bleu_score(predicted, target))
+ ##############################################################
+ #        if epoch%1 ==0 : 
+ #            torch.save(model.module.state_dict(),
+@@ -311,7 +313,7 @@ def main_worker(gpu, args):
+         #                  optimizer=optimizer.state_dict())
+         #     torch.save(state, args.checkpoint_dir / f'translation_checkpoint.pth')
+         #     print('saved translation model in', args.checkpoint_dir)
+-#    wandb.finish()
++    wandb.finish()
+            
+ 
+ 
+diff --git a/wandb/debug-internal.log b/wandb/debug-internal.log
+index b8c8383..165ed2c 120000
+--- a/wandb/debug-internal.log
++++ b/wandb/debug-internal.log
+@@ -1 +1 @@
+-run-20220406_171518-s7zesus8/logs/debug-internal.log
+\ No newline at end of file
++run-20220408_150037-ba0yl54z/logs/debug-internal.log
+\ No newline at end of file
+diff --git a/wandb/debug.log b/wandb/debug.log
+index 1d77d77..f1325dd 120000
+--- a/wandb/debug.log
++++ b/wandb/debug.log
+@@ -1 +1 @@
+-run-20220406_171518-s7zesus8/logs/debug.log
+\ No newline at end of file
++run-20220408_150037-ba0yl54z/logs/debug.log
+\ No newline at end of file
+diff --git a/wandb/latest-run b/wandb/latest-run
+index ad4b017..1413293 120000
+--- a/wandb/latest-run
++++ b/wandb/latest-run
+@@ -1 +1 @@
+-run-20220406_171518-s7zesus8
+\ No newline at end of file
++run-20220408_150037-ba0yl54z
+\ No newline at end of file

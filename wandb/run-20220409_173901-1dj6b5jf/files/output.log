@@ -1,0 +1,59 @@
+
+train_translation.py
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Some weights of the model checkpoint at bert-base-multilingual-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+{"epoch": 0, "step": 0, "loss": 7.122797966003418, "time": 4}
+{"epoch": 0, "step": 5, "loss": 198.62460327148438, "time": 4}
+{"epoch": 0, "step": 10, "loss": 119.2225341796875, "time": 4}
+/home/ivlabs/context_enhancement/context_new/context_enhancement/train_translation.py:264: UserWarning: torch.nn.utils.clip_grad_norm is now deprecated in favor of torch.nn.utils.clip_grad_norm_.
+  torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
+{"epoch": 0, "step": 15, "loss": 89.00521850585938, "time": 4}
+{"epoch": 0, "step": 20, "loss": 144.1955108642578, "time": 5}
+{"epoch": 0, "step": 25, "loss": 126.2806396484375, "time": 5}
+{"epoch": 0, "step": 30, "loss": 115.61041259765625, "time": 5}
+{"epoch": 0, "step": 35, "loss": 84.10115814208984, "time": 5}
+{"epoch": 0, "step": 40, "loss": 65.00213623046875, "time": 5}
+translation model saved in checkpoint
+{"epoch": 1, "step": 45, "loss": 79.53411865234375, "time": 75}
+{"epoch": 1, "step": 50, "loss": 81.8320541381836, "time": 75}
+{"epoch": 1, "step": 55, "loss": 97.07718658447266, "time": 75}
+{"epoch": 1, "step": 60, "loss": 77.87088012695312, "time": 75}
+{"epoch": 1, "step": 65, "loss": 91.45843505859375, "time": 75}
+{"epoch": 1, "step": 70, "loss": 81.77067565917969, "time": 76}
+{"epoch": 1, "step": 75, "loss": 93.20482635498047, "time": 76}
+{"epoch": 1, "step": 80, "loss": 96.80836486816406, "time": 76}
+{"epoch": 1, "step": 85, "loss": 99.4000473022461, "time": 76}
+translation model saved in checkpoint
+{"epoch": 2, "step": 90, "loss": 84.4419174194336, "time": 95}
+{"epoch": 2, "step": 95, "loss": 89.35089111328125, "time": 95}
+{"epoch": 2, "step": 100, "loss": 70.36296081542969, "time": 96}
+{"epoch": 2, "step": 105, "loss": 93.40479278564453, "time": 96}
+{"epoch": 2, "step": 110, "loss": 85.92987823486328, "time": 96}
+{"epoch": 2, "step": 115, "loss": 84.89830780029297, "time": 96}
+{"epoch": 2, "step": 120, "loss": 88.87590789794922, "time": 96}
+{"epoch": 2, "step": 125, "loss": 89.31674194335938, "time": 96}
+{"epoch": 2, "step": 130, "loss": 114.93965911865234, "time": 97}
+translation model saved in checkpoint
+{"epoch": 3, "step": 135, "loss": 76.80366516113281, "time": 115}
+{"epoch": 3, "step": 140, "loss": 140.8549346923828, "time": 115}
+{"epoch": 3, "step": 145, "loss": 113.339111328125, "time": 116}
+{"epoch": 3, "step": 150, "loss": 93.06966400146484, "time": 116}
+{"epoch": 3, "step": 155, "loss": 113.3215103149414, "time": 116}
+{"epoch": 3, "step": 160, "loss": 109.3653335571289, "time": 116}
+{"epoch": 3, "step": 165, "loss": 139.5435333251953, "time": 116}
+{"epoch": 3, "step": 170, "loss": 76.41168975830078, "time": 117}
+{"epoch": 3, "step": 175, "loss": 132.55953979492188, "time": 117}
+translation model saved in checkpoint
+{"epoch": 4, "step": 180, "loss": 109.78890228271484, "time": 143}
+{"epoch": 4, "step": 185, "loss": 88.3539810180664, "time": 143}
+{"epoch": 4, "step": 190, "loss": 113.5445327758789, "time": 144}
+{"epoch": 4, "step": 195, "loss": 107.1954345703125, "time": 144}
+{"epoch": 4, "step": 200, "loss": 127.9149398803711, "time": 144}
+{"epoch": 4, "step": 205, "loss": 131.3365936279297, "time": 144}
+{"epoch": 4, "step": 210, "loss": 129.23558044433594, "time": 145}
+{"epoch": 4, "step": 215, "loss": 86.24095153808594, "time": 145}
+{"epoch": 4, "step": 220, "loss": 143.04344177246094, "time": 145}
+translation model saved in checkpoint

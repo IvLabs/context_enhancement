@@ -1,0 +1,6 @@
+
+train_translation.py
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Reusing dataset opus_rf (/home/ivlabs/.cache/huggingface/datasets/opus_rf/de-en/1.0.0/3725eb23f8df679ddd37d8d65a6bbfcda7732c66edccbc62a3c3b1354c934c9f)
+Some weights of the model checkpoint at bert-base-multilingual-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.bias', 'cls.predictions.bias', 'cls.seq_relationship.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).

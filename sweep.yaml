@@ -1,23 +1,29 @@
-program: main.py
+program: train_translation.py
 method: bayes
 metric: 
     name: epoch_loss
     goal: minimize
 
-description: 'trial2 learning q distributions' 
+description: 'translation sweep' 
 parameters: 
 
-    lambd: 
+    epochs:
         distribution: 'q_uniform'
-        min: 0
-        max: 1
-        q: 0.05
+        min: 10
+        max: 40
+        q: 4
+
+    batch_size: 
+        values: [16, 32, 64, 128, 256]
     
     nhead:
         distribution: 'q_uniform'
         min: 2
         max: 8
         q: 2
+
+    dfeedforward:
+        values: [ 256, 512, 1024]
 
     nlayers:
         distribution: 'q_uniform'
@@ -26,6 +32,6 @@ parameters:
         q: 2
 
     
-
+ # to add: lr, dropout, betas, loss_fn  
 
 

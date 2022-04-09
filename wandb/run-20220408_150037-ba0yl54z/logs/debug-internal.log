@@ -1,0 +1,68 @@
+2022-04-08 15:00:37,402 INFO    wandb_internal:64646 [internal.py:wandb_internal():91] W&B internal server running at pid: 64646, started at: 2022-04-08 15:00:37.401702
+2022-04-08 15:00:37,402 INFO    MainThread:64646 [backend.py:ensure_launched():137] started backend process with pid: 0
+2022-04-08 15:00:37,404 INFO    MainThread:64646 [wandb_init.py:init():423] backend started and connected
+2022-04-08 15:00:37,404 DEBUG   MainThread:64646 [config_util.py:dict_from_config_file():101] no default config file found in config-defaults.yaml
+2022-04-08 15:00:37,406 INFO    MainThread:64646 [wandb_run.py:_config_callback():787] config_cb None None {'batch_size': 64, 'dfeedforward': 512, 'epochs': 32, 'nhead': 2, 'nlayers': 6}
+2022-04-08 15:00:37,408 INFO    MainThread:64646 [wandb_init.py:init():465] updated telemetry
+2022-04-08 15:00:37,409 INFO    MainThread:64646 [wandb_init.py:init():484] communicating current version
+2022-04-08 15:00:37,409 DEBUG   SenderThread:64646 [sender.py:send():179] send: header
+2022-04-08 15:00:37,409 INFO    WriterThread:64646 [datastore.py:open_for_write():77] open: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/run-ba0yl54z.wandb
+2022-04-08 15:00:37,410 DEBUG   HandlerThread:64646 [handler.py:handle_request():124] handle_request: check_version
+2022-04-08 15:00:37,410 DEBUG   SenderThread:64646 [sender.py:send_request():193] send_request: check_version
+2022-04-08 15:00:37,610 INFO    MainThread:64646 [wandb_init.py:init():489] got version response upgrade_message: "wandb version 0.12.13 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-04-08 15:00:37,610 INFO    MainThread:64646 [wandb_init.py:init():497] communicating run to backend with 30 second timeout
+2022-04-08 15:00:37,611 DEBUG   SenderThread:64646 [sender.py:send():179] send: run
+2022-04-08 15:00:38,249 INFO    SenderThread:64646 [dir_watcher.py:__init__():168] watching files in: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files
+2022-04-08 15:00:38,250 INFO    SenderThread:64646 [sender.py:_start_run_threads():707] run started: ba0yl54z with start time 1649410237
+2022-04-08 15:00:38,251 DEBUG   SenderThread:64646 [sender.py:send():179] send: summary
+2022-04-08 15:00:38,251 INFO    SenderThread:64646 [sender.py:_save_file():829] saving file wandb-summary.json with policy end
+2022-04-08 15:00:38,252 INFO    MainThread:64646 [wandb_init.py:init():522] starting run threads in backend
+2022-04-08 15:00:38,252 DEBUG   HandlerThread:64646 [handler.py:handle_request():124] handle_request: run_start
+2022-04-08 15:00:38,254 DEBUG   HandlerThread:64646 [meta.py:__init__():39] meta init
+2022-04-08 15:00:38,254 DEBUG   HandlerThread:64646 [meta.py:__init__():53] meta init done
+2022-04-08 15:00:38,254 DEBUG   HandlerThread:64646 [meta.py:probe():210] probe
+2022-04-08 15:00:38,260 DEBUG   HandlerThread:64646 [meta.py:_setup_git():200] setup git
+2022-04-08 15:00:38,280 DEBUG   HandlerThread:64646 [meta.py:_setup_git():207] setup git done
+2022-04-08 15:00:38,280 DEBUG   HandlerThread:64646 [meta.py:_save_code():89] save code
+2022-04-08 15:00:38,289 DEBUG   HandlerThread:64646 [meta.py:_save_code():110] save code done
+2022-04-08 15:00:38,289 DEBUG   HandlerThread:64646 [meta.py:_save_patches():127] save patches
+2022-04-08 15:00:38,341 DEBUG   HandlerThread:64646 [meta.py:_save_patches():169] save patches done
+2022-04-08 15:00:38,341 DEBUG   HandlerThread:64646 [meta.py:_save_pip():57] save pip
+2022-04-08 15:00:38,342 DEBUG   HandlerThread:64646 [meta.py:_save_pip():71] save pip done
+2022-04-08 15:00:38,342 DEBUG   HandlerThread:64646 [meta.py:_save_conda():78] save conda
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/requirements.txt
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/wandb-summary.json
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/diff.patch
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/code/train_translation.py
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/conda-environment.yaml
+2022-04-08 15:00:39,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/code
+2022-04-08 15:00:39,663 DEBUG   HandlerThread:64646 [meta.py:_save_conda():86] save conda done
+2022-04-08 15:00:39,663 DEBUG   HandlerThread:64646 [meta.py:probe():252] probe done
+2022-04-08 15:00:39,665 DEBUG   SenderThread:64646 [sender.py:send():179] send: files
+2022-04-08 15:00:39,665 INFO    SenderThread:64646 [sender.py:_save_file():829] saving file wandb-metadata.json with policy now
+2022-04-08 15:00:39,666 INFO    SenderThread:64646 [sender.py:_save_file():829] saving file code/train_translation.py with policy now
+2022-04-08 15:00:39,667 INFO    SenderThread:64646 [sender.py:_save_file():829] saving file diff.patch with policy now
+2022-04-08 15:00:39,676 INFO    MainThread:64646 [wandb_run.py:_console_start():1538] atexit reg
+2022-04-08 15:00:39,676 DEBUG   HandlerThread:64646 [handler.py:handle_request():124] handle_request: stop_status
+2022-04-08 15:00:39,676 DEBUG   SenderThread:64646 [sender.py:send_request():193] send_request: stop_status
+2022-04-08 15:00:39,678 INFO    MainThread:64646 [wandb_run.py:_redirect():1412] redirect: SettingsConsole.WRAP
+2022-04-08 15:00:39,678 INFO    MainThread:64646 [wandb_run.py:_redirect():1449] Wrapping output streams.
+2022-04-08 15:00:39,678 INFO    MainThread:64646 [wandb_run.py:_redirect():1473] Redirects installed.
+2022-04-08 15:00:39,678 INFO    MainThread:64646 [wandb_init.py:init():547] run started, returning control to user process
+2022-04-08 15:00:39,680 INFO    MainThread:64646 [wandb_run.py:_config_callback():787] config_cb None None {'workers': 4, 'learning_rate': 0.2, 'dropout': 0.01, 'weight_decay': 1e-06, 'clip': 1, 'betas': [0.9, 0.98], 'eps': 1e-09, 'loss_fn': 'cross_entropy', 'dmodel': 768, 'projector': '768-256', 'tokenizer': 'bert-base-multilingual-uncased', 'mbert_out_size': 768, 'checkpoint_dir': 'checkpoint', 'load': 0, 'checkbleu': 5, 'train': True, 'print_freq': 5, 'ngpus_per_node': 2, 'rank': 0, 'dist_url': 'tcp://localhost:58472', 'world_size': 2}
+2022-04-08 15:00:40,250 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/conda-environment.yaml
+2022-04-08 15:00:40,250 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/wandb-metadata.json
+2022-04-08 15:00:40,250 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/output.log
+2022-04-08 15:00:40,430 DEBUG   SenderThread:64646 [sender.py:send():179] send: config
+2022-04-08 15:00:41,110 INFO    Thread-16 :64646 [upload_job.py:push():133] Uploaded file /tmp/tmpy70agkq_wandb/1bd5x3gn-diff.patch
+2022-04-08 15:00:41,186 INFO    Thread-15 :64646 [upload_job.py:push():133] Uploaded file /tmp/tmpy70agkq_wandb/1kw8gilq-code/train_translation.py
+2022-04-08 15:00:41,285 INFO    Thread-14 :64646 [upload_job.py:push():133] Uploaded file /tmp/tmpy70agkq_wandb/1nmym46e-wandb-metadata.json
+2022-04-08 15:00:42,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/output.log
+2022-04-08 15:00:43,251 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/config.yaml
+2022-04-08 15:00:46,252 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/output.log
+2022-04-08 15:00:48,253 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/output.log
+2022-04-08 15:00:53,735 DEBUG   SenderThread:64646 [sender.py:send():179] send: history
+2022-04-08 15:00:53,735 DEBUG   SenderThread:64646 [sender.py:send():179] send: summary
+2022-04-08 15:00:53,737 INFO    SenderThread:64646 [sender.py:_save_file():829] saving file wandb-summary.json with policy end
+2022-04-08 15:00:54,255 INFO    Thread-11 :64646 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/context_enhancement/wandb/run-20220408_150037-ba0yl54z/files/wandb-summary.json
