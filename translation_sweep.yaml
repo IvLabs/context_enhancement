@@ -1,0 +1,53 @@
+#model_depth: 8, 24, 2
+#projector: 500, 2000, 200
+#attention_heads: 4, 12, 2
+#tokenizer: mbert, xlm-roberta, infoxlm 
+
+program: train_translation.py 
+method: bayes
+metric: 
+    name: bleu_score
+    goal: maximize
+
+description: 'transltaion sweep' 
+
+parameters: 
+        
+# training hyperparameters: 
+    
+    epochs: 
+        distribution: 'quniform'
+        min: 10
+        max: 50
+        q: 5
+
+    batch_size: 
+        values: [64, 128, 256, 512, 1024]
+
+    # change in the code
+    optimizer: 
+        values: ['adam', 'sgd']
+
+# transformer hyperparams: 
+ 
+    nhead: 
+        distribution: 'q_uniform' 
+        min: 4
+        max: 12
+        q:  2 
+    
+    #change in the code: 
+    dfeedforward: 
+        distribution: 'q_uniform'
+        min: 500 
+        max: 2000 
+        q: 200 
+
+    nlayers: 
+        distribution: 'q_uniform'
+        min: 8 
+        max: 24 
+        q: 2
+
+    # dropout ??
+    # elements of optimizer

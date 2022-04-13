@@ -51,6 +51,74 @@ class Translator(nn.Module):
             tgt_mask: Tensor): 
         return self.transformer.decoder(self.tok_emb(tgt), memory, tgt_mask)
 
+class Barlow2Twins(nn.Module): 
+    def __init__(self, 
+                pretrained_model, 
+                 projector_layers: str, 
+                 mbert_out_size: int,
+                 transformer_enc: nn.TransformerEncoder,
+                 mbert, 
+                 lambd: float): #eg. projector_layers = "1024-1024-1024"
+        super().__init__()
+        self.projector_layers = projector_layers 
+        self.mbert_out_size = mbert_out_size
+        self.transformer_enc = pretrained_model.modules.ModuleList.TransformerModel.encoder
+        self.lambd = lambd
+
+        self.mbert =  pretrained_model.tokenzier    
+
+        sizes = [self.mbert_out_size] + list(map(int, self.projector_layers.split('-')))
+        layers = []
+        for i in range(len(sizes) - 2):
+            layers.append(nn.Linear(sizes[i], sizes[i + 1], bias=False))
+            layers.append(nn.BatchNorm1d(sizes[i + 1]))
+            layers.append(nn.ReLU(inplace=True))
+        layers.append(nn.Linear(sizes[-2], sizes[-1], bias=False))
+        self.projector = nn.Sequential(*layers)
+
+        # normalization layer for the representations z1 and z2
+        self.bn = nn.BatchNorm1d(sizes[-1], affine=False) #not sure about this one, will have to check about size and all
+    
+    def forward(self,
+                x: torch.tensor,
+                y: torch.tensor): #x = numericalised text
+
+
+        x = x.squeeze(-1)
+        #print(x.shape)
+        x = self.mbert(x)
+        x = self.transformer_enc(x["last_hidden_state"].permute(1,0,2)) 
+        print(x.shape)
+        x = torch.sum(x, dim=0)/x.shape[1] # using avg pooling 
+        
+        y = y.squeeze(-1)
+        y = self.mbert(y)
+        y = self.transformer_enc(y["last_hidden_state"].permute(1,0,2)) 
+        y = torch.sum(y, dim=0)/y.shape[1] # using avg pooling 
+
+        x = self.projector(x) #x = [batch_size, projector]
+        x = self.bn(x)
+        # print(x.shape)
+        y = self.projector(y)
+        y = self.bn(y) #y = [batch_size, projector]
+
+        batch_size = y.shape[0] 
+        #emperical cross-correlation mattrix 
+        c = x.T @ y
+
+        # for multi-gpu: sum cross correlation matrix between all gpus 
+        #(uncomment below 2 lines      
+        
+        c.div_(batch_size)
+        torch.distributed.all_reduce(c)
+ 
+        on_diag = torch.diagonal(c).add_(-1).pow_(2).sum()
+        off_diag = off_diagonal(c).pow_(2).sum()
+        loss = on_diag + self.lambd * off_diag
+
+        return c, loss 
+
+
 class BarlowTwins(nn.Module):
     def __init__(self, 
                  projector_layers: str, 

@@ -57,6 +57,8 @@ parser.add_argument('--dropout', default=0.01, type=float, metavar='d',
                     help='dropout for training translation transformer')
 parser.add_argument('--weight-decay', default=1e-6, type=float, metavar='W',
                     help='weight decay')
+parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
+                    help='momentum for sgd')
 parser.add_argument('--clip', default=1, type=float, metavar='GC',
                     help='Gradient Clipping')
 parser.add_argument('--betas', default=(0.9, 0.98), type=tuple, metavar='B',
@@ -65,15 +67,17 @@ parser.add_argument('--eps', default=1e-9, type=float, metavar='E',
                     help='eps for Adam optimizer')
 parser.add_argument('--loss_fn', default='cross_entropy', type=str, metavar='LF',
                     help='loss function for translation')
+parser.add_argument('--optimizer', default='adam', type=str, metavar='OP',
+                    help='selecting optimizer')
 
 # Transformer parameters: 
 parser.add_argument('--dmodel', default=768, type=int, metavar='T', 
                     help='dimension of transformer encoder')
 parser.add_argument('--nhead', default=4, type= int, metavar='N', 
                     help= 'number of heads in transformer') 
-parser.add_argument('--dfeedforward', default=256, type=int, metavar='F', 
+parser.add_argument('--dfeedforward', default=500, type=int, metavar='F', 
                     help= 'dimension of feedforward layer in transformer encoder') 
-parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
+parser.add_argument('--nlayers', default=8, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
 parser.add_argument('--projector', default='768-256', type=str,
                     metavar='MLP', help='projector MLP')
@@ -214,7 +218,10 @@ def main_worker(gpu, args):
     model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[gpu], find_unused_parameters=True)
 
 ###########################################################
-    optimizer =torch.optim.Adam(model.parameters(), lr=args.learning_rate, betas=args.betas, eps=args.eps) 
+    if args.optimizer == 'adam':
+        optimizer =torch.optim.Adam(model.parameters(), lr=args.learning_rate, betas=args.betas, eps=args.eps) 
+    else: 
+        optimizer = torch.optim.SGD(model.parameters(), lr=args.learning_rate, momentum=args.momentum, weight_decay=args.weight_decay) 
     
     if args.loss_fn == 'cross_entropy': 
         loss_fn = torch.nn.CrossEntropyLoss(ignore_index=pad_idx)

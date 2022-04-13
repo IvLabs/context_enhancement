@@ -23,7 +23,7 @@ from torch import nn, optim
 import torch
 from t_dataset import Translation_dataset_t
 from torch.nn import Transformer
-from models import BarlowTwins
+from models import BarlowTwins, Barlow2Twins
 from models import Translator
 from barlow_utils import off_diagonal 
 import wandb 
@@ -72,7 +72,8 @@ parser.add_argument('--clip', default=1, type=float, metavar='GC',
 # Model parameters:
 parser.add_argument('--projector', default='768-768', type=str,
                     metavar='MLP', help='projector MLP')
-parser.add_argument('--print-freq', default=100, type=int, metavar='N',
+parser.add_argument('--print-freq', defa    model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, mbert=mbert, lambd=args.lambd).cuda(gpu)
+ult=100, type=int, metavar='N',
                     help='print frequency')
 
 # Transformer parameters: 
@@ -158,6 +159,11 @@ def main_worker(gpu, args):
     t_enc = nn.TransformerEncoder(transformer1, num_layers=args.nlayers)
     mbert = BertModel.from_pretrained(args.tokenizer)
     model = BarlowTwins(projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, mbert=mbert, lambd=args.lambd).cuda(gpu)
+    en2de = torch.hub.load('pytorch/fairseq', 'transformer.wmt16.en-de',
+                       tokenizer='moses', bpe='subword_nmt')
+
+    model = Barlow2Twins(pretrained_model= ,projector_layers=args.projector, mbert_out_size=args.mbert_out_size, transformer_enc=t_enc, mbert=mbert, lambd=args.lambd).cuda(gpu)
+
     model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     param_weights = []
