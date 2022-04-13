@@ -11,7 +11,7 @@ class Translation_dataset(Dataset):
     
     def __init__(self):
       
-        self.dataset = load_dataset('opus_rf', "de-en", split="train") 
+        self.dataset = load_dataset('wmt14', "de-en", split="train") 
         self.de_list = []
         self.en_list = []
 
