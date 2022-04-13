@@ -243,6 +243,7 @@ def main_worker(gpu, args):
         for epoch in range(start_epoch, args.epochs):
             sampler.set_epoch(epoch)
             epoch_loss = 0 
+            t = 0 
             for step, (sent) in enumerate(loader, start=epoch * len(loader)):
                 src = sent[0].cuda(gpu, non_blocking=True)
                 tgt_inp = sent[2].cuda(gpu, non_blocking=True)
@@ -261,6 +262,7 @@ def main_worker(gpu, args):
                 
                 # wandb.log({'iter_loss': loss})
                 epoch_loss += loss.item()
+                t += 1 
                 torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
                 
                 if step % args.print_freq == 0:
@@ -272,7 +274,7 @@ def main_worker(gpu, args):
                         print(json.dumps(stats), file=stats_file)
             if args.rank == 0:
 
-                wandb.log({"epoch_loss":epoch_loss})
+                wandb.log({"epoch_loss":epoch_loss/t})
                 # save checkpoint
                 state = dict(epoch=epoch + 1, model=model.module.state_dict(),
                             optimizer=optimizer.state_dict())
