@@ -20,7 +20,7 @@ class Translation_dataset_t(Dataset):
             split = "train" 
         else: 
             split = "test" 
-        self.dataset = load_dataset('opus_rf', "de-en", split=split) 
+        self.dataset = load_dataset('wmt14', "de-en", split=split) 
         self.de_list = []
         self.en_list = []
 #        self.tokenizer = tokenizer
