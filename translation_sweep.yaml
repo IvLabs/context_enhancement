@@ -17,12 +17,12 @@ parameters:
     
     epochs: 
         distribution: 'quniform'
-        min: 10
+        min: 5
         max: 50
         q: 5
 
     batch_size: 
-        values: [64, 128, 256, 512, 1024]
+        values: [8, 32, 64, 128, 256, 512]
 
     # change in the code
     optimizer: 
