@@ -88,10 +88,10 @@ class TokenEmbedding(nn.Module):
         super(TokenEmbedding, self).__init__()
         # self.embedding = nn.Embedding(vocab_size, emb_size)
         self.embedding = mbert
-        for param in self.embedding.parameters():
-            param.requires_grad = False
-        for param in self.embedding.pooler.parameters():
-            param.requires_grad = True
+#         for param in self.embedding.parameters():
+#             param.requires_grad = False
+#         for param in self.embedding.pooler.parameters():
+#             param.requires_grad = True
         self.emb_size = emb_size
 
     def forward(self, tokens: torch.tensor):
