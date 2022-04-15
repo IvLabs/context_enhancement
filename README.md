@@ -12,7 +12,7 @@ $ wandb login
 
 ### 3. Hyperparameter sweeping: 
 ```bash
-$ wandb sweep sweep.yaml
+$ wandb sweep translation_sweep.yaml
 ```
 run the output of the above command which would be of following format: 
 ```
