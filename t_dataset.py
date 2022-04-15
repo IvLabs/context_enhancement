@@ -25,14 +25,14 @@ class Translation_dataset_t(Dataset):
         self.en_list = []
 #        self.tokenizer = tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained('bert-base-multilingual-uncased')
-        dataset = load_dataset('opus_rf', 'de-en', split='train')
         en_list_2 = []
-        for n, i in enumerate(dataset): 
+        for n, i in enumerate(self.dataset): 
             en_list_2.append(i['translation']['en'].lower())
 
         a1 = list(self.tokenizer(en_list_2, padding=True, return_tensors='pt')['input_ids'])
         self.en_vocab, self.en_vocab_size = vocab(a1)
         self.bert2id_dict = translation_utils.bert2id(self.en_vocab)
+        self.id2bert_dict = translation_utils.id2bert(self.en_vocab)
         
         for i in self.dataset: 
             self.de_list.append(self.tokenizer(i['translation']['de'].lower(), 

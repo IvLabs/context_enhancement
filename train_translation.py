@@ -33,6 +33,7 @@ import wandb
 #import barlow
 os.environ['TRANSFORMERS_OFFLINE'] = 'yes'
 os.environ['WANDB_START_METHOD'] = 'thread'
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 MANUAL_SEED = 4444
 
@@ -47,9 +48,9 @@ parser = argparse.ArgumentParser(description = 'Translation')
 # Training hyper-parameters: 
 parser.add_argument('--workers', default=4, type=int, metavar='N', 
                     help='number of data loader workers') 
-parser.add_argument('--epochs', default=5, type=int, metavar='N',
+parser.add_argument('--epochs', default=10, type=int, metavar='N',
                     help='number of total epochs to run')
-parser.add_argument('--batch_size', default=4, type=int, metavar='n',
+parser.add_argument('--batch_size', default=16, type=int, metavar='n',
                     help='mini-batch size')
 parser.add_argument('--learning-rate', default=0.2, type=float, metavar='LR',
                     help='base learning rate')
@@ -75,9 +76,9 @@ parser.add_argument('--dmodel', default=768, type=int, metavar='T',
                     help='dimension of transformer encoder')
 parser.add_argument('--nhead', default=4, type= int, metavar='N', 
                     help= 'number of heads in transformer') 
-parser.add_argument('--dfeedforward', default=500, type=int, metavar='F', 
+parser.add_argument('--dfeedforward', default=200, type=int, metavar='F', 
                     help= 'dimension of feedforward layer in transformer encoder') 
-parser.add_argument('--nlayers', default=8, type=int, metavar= 'N', 
+parser.add_argument('--nlayers', default=3, type=int, metavar= 'N', 
                    help='number of layers of transformer encoder') 
 parser.add_argument('--projector', default='768-256', type=str,
                     metavar='MLP', help='projector MLP')
@@ -233,6 +234,7 @@ def main_worker(gpu, args):
 
     assert args.batch_size % args.world_size == 0
     per_device_batch_size = args.batch_size // args.world_size
+    id2bert_dict = dataset.id2bert_dict
     ###############################
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
@@ -267,7 +269,7 @@ def main_worker(gpu, args):
                 optimizer.step()
                 # losses += loss.item()
                 
-                # wandb.log({'iter_loss': loss})
+#                wandb.log({'iter_loss': loss})
                 epoch_loss += loss.item()
                 t += 1 
                 torch.nn.utils.clip_grad_norm(model.parameters(), args.clip)
@@ -293,7 +295,7 @@ def main_worker(gpu, args):
             if args.rank == 0: 
                 if epoch%args.checkbleu ==0 : 
 
-                    bleu_score = checkbleu(model, tokenizer, test_loader, gpu)
+                    bleu_score = checkbleu(model, tokenizer, test_loader, id2bert_dict, gpu)
                     wandb.log({'bleu_score': bleu_score}) 
     #            print(bleu_score(predicted, target))
     ##############################################################
@@ -311,13 +313,13 @@ def main_worker(gpu, args):
             
     else: 
 
-        bleu_score = checkbleu(model,tokenizer, test_loader, gpu )
+        bleu_score = checkbleu(model,tokenizer, test_loader, id2bert_dict, gpu )
         print('test_bleu_score', bleu_score)
         if args.rank == 0: 
             wandb.log({'bleu_score': bleu_score})
 
 
-def checkbleu(model, tokenizer, test_loader, gpu): 
+def checkbleu(model, tokenizer, test_loader, id2bert_dict, gpu): 
 
     model.eval()
     predicted=[]
@@ -325,19 +327,24 @@ def checkbleu(model, tokenizer, test_loader, gpu):
             
     for i in test_loader: 
         src = i[0].cuda(gpu, non_blocking=True)
+#        tgt_out = i[1][1:, : ].cuda(gpu, non_blocking=True)
         tgt_out = i[3].cuda(gpu, non_blocking=True)
         num_tokens = src.shape[0]
 
         src_mask = (torch.zeros(num_tokens, num_tokens)).type(torch.bool).cuda(gpu, non_blocking=True)
-        out = translate(model, src, tokenizer, src_mask, gpu)
+        out = translate(model, src, tokenizer, src_mask, id2bert_dict, gpu)
         predicted.append(out)
+        for i in range(len(tgt_out)): 
+            tgt_out[i] = id2bert_dict[tgt_out[i].item()]
         target.append([tokenizer.convert_ids_to_tokens(tgt_out)])
+
                 
         try: 
             bleu_score(predicted, target)
         except: 
             predicted.pop()
             target.pop()
+        
             
         bleu = bleu_score(predicted, target)
 
@@ -375,7 +382,7 @@ def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx, gpu):
 # actual function to translate input sentence into target language
 def translate(model: torch.nn.Module, 
         src: torch.tensor, 
-        tokenizer,src_mask, gpu):
+        tokenizer,src_mask, id2bert_dict, gpu):
     model.eval()
     
     num_tokens = src.shape[0]
@@ -383,6 +390,11 @@ def translate(model: torch.nn.Module,
     
     tgt_tokens = greedy_decode(
         model,  src, src_mask, max_len=num_tokens + 5, start_symbol=tokenizer.cls_token_id, eos_idx=tokenizer.sep_token_id, gpu=gpu).flatten()
+    
+    for i in range(len(tgt_tokens)): 
+        tgt_tokens[i] = id2bert_dict[tgt_tokens[i].item()]
+#    print(tgt_tokens)
+
     return tokenizer.convert_ids_to_tokens(tgt_tokens) 
 
 

@@ -1,0 +1,41 @@
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_setup.py:_flush():69] setting env: {'start_method': 'thread'}
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_setup.py:_flush():69] setting login settings: {}
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_init.py:_log_setup():336] Logging user logs to /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/logs/debug.log
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_init.py:_log_setup():337] Logging internal logs to /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/logs/debug-internal.log
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_init.py:init():369] calling init triggers
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_init.py:init():376] wandb.init called with sweep_config: {}
+config: {'workers': 4, 'epochs': 5, 'batch_size': 4, 'learning_rate': 0.2, 'dropout': 0.01, 'weight_decay': 1e-06, 'momentum': 0.9, 'clip': 1, 'betas': (0.9, 0.98), 'eps': 1e-09, 'loss_fn': 'cross_entropy', 'optimizer': 'adam', 'dmodel': 768, 'nhead': 4, 'dfeedforward': 200, 'nlayers': 3, 'projector': '768-256', 'tokenizer': 'bert-base-multilingual-uncased', 'mbert_out_size': 768, 'checkpoint_dir': PosixPath('checkpoint'), 'load': 0, 'checkbleu': 5, 'train': True, 'print_freq': 5, 'test_translation': 0, 'ngpus_per_node': 2, 'rank': 0, 'dist_url': 'tcp://localhost:58472', 'world_size': 2}
+2022-04-15 20:32:40,955 INFO    MainThread:6751 [wandb_init.py:init():418] starting backend
+2022-04-15 20:32:40,963 INFO    MainThread:6751 [backend.py:ensure_launched():132] starting backend process...
+2022-04-15 20:32:40,973 INFO    MainThread:6751 [backend.py:ensure_launched():137] started backend process with pid: 0
+2022-04-15 20:32:40,986 INFO    wandb_internal:6751 [internal.py:wandb_internal():91] W&B internal server running at pid: 6751, started at: 2022-04-15 20:32:40.973711
+2022-04-15 20:32:40,989 INFO    MainThread:6751 [wandb_init.py:init():423] backend started and connected
+2022-04-15 20:32:40,991 INFO    MainThread:6751 [wandb_init.py:init():465] updated telemetry
+2022-04-15 20:32:41,002 INFO    MainThread:6751 [wandb_init.py:init():484] communicating current version
+2022-04-15 20:32:41,033 INFO    WriterThread:6751 [datastore.py:open_for_write():77] open: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/run-1bwp8j0o.wandb
+2022-04-15 20:32:41,353 INFO    MainThread:6751 [wandb_init.py:init():489] got version response upgrade_message: "wandb version 0.12.14 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-04-15 20:32:41,353 INFO    MainThread:6751 [wandb_init.py:init():497] communicating run to backend with 30 second timeout
+2022-04-15 20:32:42,068 INFO    MainThread:6751 [wandb_init.py:init():522] starting run threads in backend
+2022-04-15 20:32:42,154 INFO    SenderThread:6751 [dir_watcher.py:__init__():168] watching files in: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files
+2022-04-15 20:32:42,154 INFO    SenderThread:6751 [sender.py:_start_run_threads():707] run started: 1bwp8j0o with start time 1650034960
+2022-04-15 20:32:42,155 INFO    SenderThread:6751 [sender.py:_save_file():829] saving file wandb-summary.json with policy end
+2022-04-15 20:32:43,129 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/requirements.txt
+2022-04-15 20:32:43,129 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/wandb-summary.json
+2022-04-15 20:32:43,130 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/code/train_translation.py
+2022-04-15 20:32:43,130 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/conda-environment.yaml
+2022-04-15 20:32:43,130 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/diff.patch
+2022-04-15 20:32:43,130 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/code
+2022-04-15 20:32:47,048 INFO    SenderThread:6751 [sender.py:_save_file():829] saving file wandb-metadata.json with policy now
+2022-04-15 20:32:47,048 INFO    SenderThread:6751 [sender.py:_save_file():829] saving file code/train_translation.py with policy now
+2022-04-15 20:32:47,048 INFO    SenderThread:6751 [sender.py:_save_file():829] saving file diff.patch with policy now
+2022-04-15 20:32:47,081 INFO    MainThread:6751 [wandb_run.py:_console_start():1538] atexit reg
+2022-04-15 20:32:47,082 INFO    MainThread:6751 [wandb_run.py:_redirect():1412] redirect: SettingsConsole.WRAP
+2022-04-15 20:32:47,082 INFO    MainThread:6751 [wandb_run.py:_redirect():1449] Wrapping output streams.
+2022-04-15 20:32:47,128 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_modified():229] file/dir modified: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/conda-environment.yaml
+2022-04-15 20:32:47,128 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/output.log
+2022-04-15 20:32:47,128 INFO    Thread-12 :6751 [dir_watcher.py:_on_file_created():216] file/dir created: /home/ivlabs/context_enhancement/context_new/new/context_enhancement/wandb/run-20220415_203240-1bwp8j0o/files/wandb-metadata.json
+2022-04-15 20:32:47,137 INFO    MainThread:6751 [wandb_run.py:_redirect():1473] Redirects installed.
+2022-04-15 20:32:47,137 INFO    MainThread:6751 [wandb_init.py:init():547] run started, returning control to user process
+2022-04-15 20:32:47,138 INFO    MainThread:6751 [wandb_run.py:_config_callback():787] config_cb None None {'workers': 4, 'epochs': 5, 'batch_size': 4, 'learning_rate': 0.2, 'dropout': 0.01, 'weight_decay': 1e-06, 'momentum': 0.9, 'clip': 1, 'betas': [0.9, 0.98], 'eps': 1e-09, 'loss_fn': 'cross_entropy', 'optimizer': 'adam', 'dmodel': 768, 'nhead': 4, 'dfeedforward': 200, 'nlayers': 3, 'projector': '768-256', 'tokenizer': 'bert-base-multilingual-uncased', 'mbert_out_size': 768, 'checkpoint_dir': 'checkpoint', 'load': 0, 'checkbleu': 5, 'train': True, 'print_freq': 5, 'test_translation': 0, 'ngpus_per_node': 2, 'rank': 0, 'dist_url': 'tcp://localhost:58472', 'world_size': 2}
+2022-04-15 20:32:48,685 INFO    Thread-14 :6751 [upload_job.py:push():133] Uploaded file /tmp/tmpfzph_9yfwandb/a1uf7dt2-wandb-metadata.json

@@ -31,6 +31,13 @@ def bert2id(de_list: set):
     
     return label_dict
 
+def id2bert(de_list: set): 
+    label_dict = {}
+    for n, i in enumerate(de_list): 
+        label_dict[n] = i
+    
+    return label_dict
+
 def generate_square_subsequent_mask(sz):
     mask = (torch.triu(torch.ones((sz, sz))) == 1).transpose(0, 1)
     mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
@@ -81,10 +88,10 @@ class TokenEmbedding(nn.Module):
         super(TokenEmbedding, self).__init__()
         # self.embedding = nn.Embedding(vocab_size, emb_size)
         self.embedding = mbert
-#         for param in self.embedding.parameters():
-#             param.requires_grad = False
-#         for param in self.embedding.pooler.parameters():
-#             param.requires_grad = True
+        for param in self.embedding.parameters():
+            param.requires_grad = False
+        for param in self.embedding.pooler.parameters():
+            param.requires_grad = True
         self.emb_size = emb_size
 
     def forward(self, tokens: torch.tensor):
