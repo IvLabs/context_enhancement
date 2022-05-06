@@ -1,4 +1,4 @@
-# edits: padding=True 
+
 import torch 
 from datasets import load_dataset
 from transformers import AutoTokenizer 
@@ -35,13 +35,16 @@ class Translation_dataset_t(Dataset):
             #print(n)
             if n==500:
                 break
-        #print(len(en_list_2))
+        print(len(en_list_2))
         # print(max(en_list_2))
-        token_res = self.tokenizer(en_list_2, padding=True,max_length=512, return_tensors='pt', truncation=True)['input_ids']
+        print('error not found') 
+        token_res = self.tokenizer(en_list_2, padding='max_length',max_length=512, return_tensors='pt', truncation=True)['input_ids']
         a1 = list(token_res)
+        print('error') 
         self.en_vocab, self.en_vocab_size = vocab(a1)
         self.bert2id_dict = translation_utils.bert2id(self.en_vocab)
         self.id2bert_dict = translation_utils.id2bert(self.en_vocab)
+        print('e') 
         
 
         for n, i in enumerate(self.dataset): 
@@ -54,26 +57,38 @@ class Translation_dataset_t(Dataset):
 
             #else: 
                # print(len(i['translation']['de']))
-            self.de_list.append(self.tokenizer(i['translation']['de'].lower(), padding=True, return_tensors='pt',max_length=512, truncation=True)["input_ids"])
-            self.en_list.append(self.tokenizer(i['translation']['en'].lower(), padding=True, return_tensors='pt',max_length=512, truncation=True)["input_ids"])
-            if n==500:
-                break
-
+            if len(i['translation']['de'].lower()) > 500: 
+                pass
+            elif len(i['translation']['en'].lower())>500: 
+                pass
+           
+            self.de_list.append(self.tokenizer(i['translation']['de'].lower(), padding='max_length', return_tensors='pt',max_length=512, truncation=True)["input_ids"])
+            self.en_list.append(self.tokenizer(i['translation']['en'].lower(), padding='max_length', return_tensors='pt',max_length=512, truncation=True)["input_ids"])
+          #  if n==500:
+          #      break
+        '''
         for i in self.dataset: 
             self.de_list.append(self.tokenizer(i['translation']['de'].lower(), 
                         padding=True, return_tensors='pt')["input_ids"])
             self.en_list.append(self.tokenizer(i['translation']['en'].lower(),
                         padding=True, return_tensors='pt')["input_ids"])
+          '''  
         # en_list_id = []
         # for i in self.dataset: 
         #     en_list_id.append(i['translation']['en'].lower())
+
         de_list_1 = []
         for n,i in enumerate(self.dataset): 
-          de_list_1.append(i['translation']['de'].lower())
-          if n==500:
-                break
 
-        a = list(self.tokenizer(de_list_1, padding=True, return_tensors='pt',max_length=512, truncation=True)['input_ids'])
+            if len(i['translation']['de'].lower()) > 500: 
+                pass
+            elif len(i['translation']['en'].lower())>500: 
+                pass
+            de_list_1.append(i['translation']['de'].lower())
+            #if n==500:
+                #break
+
+        a = list(self.tokenizer(de_list_1, padding='max_length', return_tensors='pt',max_length=512, truncation=True)['input_ids'])
 
         en_list_1 = []
         for n,i in enumerate(self.dataset): 
@@ -81,7 +96,7 @@ class Translation_dataset_t(Dataset):
           if n==500:
               break
 
-        b = list(self.tokenizer(de_list_1, padding=True, max_length=512, return_tensors='pt', truncation=True)['input_ids'])
+        b = list(self.tokenizer(de_list_1, padding='max_length', max_length=512, return_tensors='pt', truncation=True)['input_ids'])
         # en_vocab, self.en_vocab_size = vocab(b)
         self.de_vocab, self.de_vocab_size = vocab(a) 
             

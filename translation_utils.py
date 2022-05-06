@@ -88,14 +88,31 @@ class TokenEmbedding(nn.Module):
         super(TokenEmbedding, self).__init__()
         # self.embedding = nn.Embedding(vocab_size, emb_size)
         self.embedding = mbert
-#         for param in self.embedding.parameters():
-#             param.requires_grad = False
-#         for param in self.embedding.pooler.parameters():
-#             param.requires_grad = True
+        for param in self.embedding.parameters():
+            param.requires_grad = False
+        for param in self.embedding.pooler.parameters():
+            param.requires_grad = True
         self.emb_size = emb_size
 
     def forward(self, tokens: torch.tensor):
         # print(tokens.shape)
         if len(tokens.shape) ==1: 
             tokens  = tokens.unsqueeze(-1)
+
+        try: 
+            self.embedding(tokens.long().T)['last_hidden_state']
+        except RuntimeError: 
+            print('errored')
+
         return self.embedding(tokens.long().T)['last_hidden_state'].permute(1, 0, 2) * math.sqrt(self.emb_size)
+
+  #      try: 
+
+
+'''
+        except RuntimeError: 
+            print('errored')
+            b = torch.zeros(tokens.shape[0], 1, 768)
+            pass
+
+'''

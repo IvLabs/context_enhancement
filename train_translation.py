@@ -17,6 +17,7 @@ import torchtext
 import t_dataset
 from t_dataset import  Translation_dataset_t
 from t_dataset import  MyCollate
+import translation_dataset
 import translation_utils 
 from translation_utils import TokenEmbedding, PositionalEncoding 
 from translation_utils import create_mask
@@ -149,10 +150,11 @@ def main_worker(gpu, args):
         world_size=args.world_size, rank=args.rank)
 
     if args.rank == 0:
-
+        '''
         wandb.init(config=args, project='translation_test')#############################################
         wandb.config.update(args)
         config = wandb.config
+        '''
     
         # exit()
         args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -163,7 +165,11 @@ def main_worker(gpu, args):
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
 
+#    print('loading barlow dataset') 
+#    dataset = translation_dataset.Translation_dataset() 
+    print('loading translation dataset') 
     dataset = Translation_dataset_t(train=args.train) 
+    print('dataset loaded')
     src_vocab_size = dataset.de_vocab_size
     trg_vocab_size = dataset.en_vocab_size
     tokenizer = dataset.tokenizer  
@@ -236,10 +242,11 @@ def main_worker(gpu, args):
     per_device_batch_size = args.batch_size // args.world_size
     id2bert_dict = dataset.id2bert_dict
     ###############################
+    print('instantiating dataloader')
     loader = torch.utils.data.DataLoader(
          dataset, batch_size=per_device_batch_size, num_workers=args.workers,
          pin_memory=True, sampler=sampler, collate_fn = MyCollate(tokenizer=tokenizer,bert2id_dict=dataset.bert2id_dict))
-   
+    print('loaded on cuda')
     test_loader = torch.utils.data.DataLoader(
          dataset, batch_size=1, num_workers=args.workers,
          pin_memory=True, sampler=sampler, collate_fn = MyCollate(tokenizer=tokenizer,bert2id_dict=dataset.bert2id_dict))
@@ -283,7 +290,7 @@ def main_worker(gpu, args):
                         print(json.dumps(stats), file=stats_file)
             if args.rank == 0:
 
-                wandb.log({"epoch_loss":epoch_loss/t})
+                #wandb.log({"epoch_loss":epoch_loss/t})
                 # save checkpoint
                 state = dict(epoch=epoch + 1, model=model.module.state_dict(),
                             optimizer=optimizer.state_dict())
@@ -296,7 +303,7 @@ def main_worker(gpu, args):
                 if epoch%args.checkbleu ==0 : 
 
                     bleu_score = checkbleu(model, tokenizer, test_loader, id2bert_dict, gpu)
-                    wandb.log({'bleu_score': bleu_score}) 
+                    #wandb.log({'bleu_score': bleu_score}) 
     #            print(bleu_score(predicted, target))
     ##############################################################
     #        if epoch%1 ==0 : 
@@ -309,14 +316,14 @@ def main_worker(gpu, args):
             #                  optimizer=optimizer.state_dict())
             #     torch.save(state, args.checkpoint_dir / f'translation_checkpoint.pth')
             #     print('saved translation model in', args.checkpoint_dir)
-        wandb.finish()
+        #wandb.finish()
             
     else: 
 
         bleu_score = checkbleu(model,tokenizer, test_loader, id2bert_dict, gpu )
         print('test_bleu_score', bleu_score)
-        if args.rank == 0: 
-            wandb.log({'bleu_score': bleu_score})
+#        if args.rank == 0: 
+            #wandb.log({'bleu_score': bleu_score})
 
 
 def checkbleu(model, tokenizer, test_loader, id2bert_dict, gpu): 
@@ -366,6 +373,10 @@ def greedy_decode(model, src, src_mask, max_len, start_symbol, eos_idx, gpu):
         memory = memory
         tgt_mask = (translation_utils.generate_square_subsequent_mask(ys.size(0))
                     .type(torch.bool)).cuda(gpu, non_blocking=True)
+
+        print('ys shape: ', ys.shape) 
+        print('memory.shape', memory.shape) 
+        print('tgt_mask.shape', tgt_mask.shape) 
         out = model.module.decode(ys, memory, tgt_mask)
         out = out.transpose(0, 1)
         prob = model.module.generator(out[:, -1])
@@ -400,4 +411,4 @@ def translate(model: torch.nn.Module,
 
 if __name__ == '__main__': 
     main()
-    wandb.finish()
+    #wandb.finish()

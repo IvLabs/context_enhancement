@@ -16,8 +16,16 @@ class Translation_dataset(Dataset):
         self.en_list = []
 
         for i in self.dataset: 
-            self.de_list.append(tokenizer(i['translation']['de'].lower(), padding=True, return_tensors='pt')["input_ids"])
-            self.en_list.append(tokenizer(i['translation']['en'].lower(), padding=True, return_tensors='pt')["input_ids"])
+            if len(i['translation']['de'])> 400:
+                #print(len(i['translation']['de']))
+                pass 
+            elif len(i['translation']['en'])> 400: 
+                #print(len(i['translation']['en']))
+                pass
+            else: 
+               # print(len(i['translation']['de']))
+                self.de_list.append(tokenizer(i['translation']['de'].lower(), padding=True, return_tensors='pt')["input_ids"])
+                self.en_list.append(tokenizer(i['translation']['en'].lower(), padding=True, return_tensors='pt')["input_ids"])
             
 
   
