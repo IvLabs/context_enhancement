@@ -2,6 +2,9 @@
 
 ### 1. Install the requirements
 ```
+$ conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+```
+```
 $ pip install -r requirements.txt
 ```
 ### 2. Login to your wandb account: 
